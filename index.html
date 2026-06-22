@@ -1070,13 +1070,14 @@ function saveCapture(){
   captures.push({cat:selectedCat, text:text});
   input.value='';
   renderCapList();
+  renderCloseCaptures();
   document.getElementById('cap-count').textContent = captures.length;
 }
 function deleteCapture(i){
   captures.splice(i,1);
   renderCapList();
+  renderCloseCaptures();
   document.getElementById('cap-count').textContent = captures.length;
-  if(document.querySelector('.scene[data-scene="5"]').style.display!=='none') renderCloseCaptures();
 }
 function editCapture(i){
   var c = captures[i];
