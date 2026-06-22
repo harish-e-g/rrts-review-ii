@@ -279,7 +279,8 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
 .close-item-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0;align-items:center}
 .cap-list-item{display:flex;align-items:flex-start;gap:6px}
 .cap-list-actions{display:flex;gap:4px;flex-shrink:0;align-items:flex-start;padding-top:1px}
-.cap-action-btn{border:none;background:transparent;cursor:pointer;font-size:11px;padding:2px 5px;border-radius:4px;line-height:1;transition:background .15s,color .15s}
+.cap-action-btn{border:none;background:transparent;cursor:pointer;font-size:11px;padding:2px 5px;border-radius:4px;line-height:1;transition:background .15s,color .15s;display:none}
+body.is-admin .cap-action-btn{display:inline-flex}
 .cap-action-btn.edit{color:var(--blue)}
 .cap-action-btn.edit:hover{background:var(--blue-pale);color:var(--blue-deep)}
 .cap-action-btn.del{color:var(--coral)}
@@ -443,6 +444,35 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
 /* --- ported pod tree (Option A) --- */
 .arch-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 22px;margin:10px 0 0;flex:1;min-height:0;display:flex;flex-direction:column}
 .arch-svg{width:100%;height:100%;flex:1;min-height:0;display:block;text-rendering:geometricPrecision;shape-rendering:crispEdges}
+/* ── POD HTML LAYOUT ─────────────────────────── */
+.pod-html{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 20px;margin:8px 0 0;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;width:100%}
+.pod-band-label{width:100%;font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--ink-mid);text-transform:uppercase;padding:4px 0 2px;text-align:left}
+.pod-row{display:flex;justify-content:center;gap:10px;width:100%}
+.pod-row-4{justify-content:space-between}
+.pod-row-2{justify-content:space-evenly}
+.pod-node{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.pod-node-gov{width:240px}
+.pod-node-pandu{width:170px;border-color:var(--blue);background:var(--blue-pale)}
+.pod-node-eng{flex:1;max-width:23%}
+.pod-node-hub{width:320px;background:var(--blue-deep);border:none;color:#fff;font-weight:700;font-size:clamp(11px,1vw,12.5px);border-radius:20px;padding:8px 16px}
+.pod-node-sys{flex:1;max-width:38%}
+.pod-node-sys-blue{border-color:var(--blue)}
+.pod-node-sys-teal{border-color:var(--teal)}
+.pod-node-title{font-size:clamp(11px,.95vw,12.5px);font-weight:700;color:var(--ink);line-height:1.2;margin-top:2px}
+.pod-node-title-blue{color:var(--blue-deep)}
+.pod-node-sub{font-size:10px;color:#475569;font-weight:500;line-height:1.2}
+.pod-node-sub-teal{color:var(--teal);font-weight:700}
+.pod-ico{width:13px;height:13px;stroke-width:2;flex-shrink:0;color:var(--ink-mid)}
+.pod-caps-block{width:100%;display:flex;align-items:center;background:#F1F5F9;border:1px solid #CBD5E1;border-radius:8px;padding:5px 0}
+.pod-cap{flex:1;text-align:center;font-size:10px;font-weight:600;color:#475569;font-family:var(--font)}
+.pod-cap-div{width:1px;height:14px;background:#CBD5E1;flex-shrink:0}
+.pod-connector-v{width:2px;height:8px;background:var(--border)}
+.pod-h-connector{width:100%;display:flex;flex-direction:column;align-items:center;padding:0 5%}
+.pod-h-connector-2{padding:0 26%}
+.pod-h-line{width:100%;height:1.5px;background:var(--border)}
+.pod-h-drops{width:100%;display:flex;justify-content:space-between}
+.pod-h-drop{width:1.5px;height:7px;background:var(--border)}
+.pod-anim-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .band-label{font-size:12.5px;letter-spacing:.14em;fill:var(--ink-mid);font-weight:700;font-family:'Avenir Next','Avenir','Manrope','Inter',sans-serif}
 .arch-node{cursor:default}
 @keyframes beadglow{0%,100%{opacity:1;r:3}50%{opacity:.6;r:2.2}}
@@ -577,21 +607,126 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
   <div class="pod-modernize" style="background:var(--blue-deep);color:#fff;border:none;padding:10px 18px;border-radius:10px;font-size:clamp(12px,1.05vw,14px);font-weight:600;line-height:1.7;margin-bottom:10px">
     <strong style="color:#FBBF24">Modernisation through the joint RRTS &times; Prowesstics effort</strong> &nbsp;&middot;&nbsp; Legacy 6,000-line stored procedure modernised and simplified into clean ETL &nbsp;&middot;&nbsp; SSAS retiring &nbsp;&middot;&nbsp; MS Power BI &amp; Microsoft Fabric both live now<br><span style="display:inline-block;padding-left:2em">&middot;&nbsp; Pipelines from 3 hours to 1 hr 20 min &nbsp;&middot;&nbsp; Rendering from 2 minutes to under 10 seconds</span>
   </div>
-  <div class="arch-wrapper">
-    <svg class="arch-svg" viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Pure HTML pod diagram — zero foreignObject -->
+  <div class="pod-html" id="pod-html">
+
+    <!-- Band label 1 -->
+    <div class="pod-band-label">1 &middot; THE POD &middot; 4 ENGINEERS + 1 PM</div>
+
+    <!-- Row 1: Prowesstics leadership -->
+    <div class="pod-row pod-row-center">
+      <div class="pod-node pod-node-gov">
+        <div class="pod-node-sub">Delivery governance</div>
+        <div class="pod-node-title">Prowesstics leadership</div>
+      </div>
+    </div>
+
+    <!-- Connector: leadership → Pandu -->
+    <div class="pod-connector-v"></div>
+
+    <!-- Row 2: Pandu -->
+    <div class="pod-row pod-row-center">
+      <div class="pod-node pod-node-pandu">
+        <svg class="ico pod-ico"><use href="#i-user"/></svg>
+        <div class="pod-node-title pod-node-title-blue">Pandu &middot; PM</div>
+        <div class="pod-node-sub">governs delivery rhythm</div>
+      </div>
+    </div>
+
+    <!-- Connector: Pandu → 4 engineers (horizontal spread) -->
+    <div class="pod-h-connector">
+      <div class="pod-h-line"></div>
+      <div class="pod-h-drops">
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+      </div>
+    </div>
+
+    <!-- Row 3: 4 Engineers -->
+    <div class="pod-row pod-row-4">
+      <div class="pod-node pod-node-eng">
+        <svg class="ico pod-ico"><use href="#i-server"/></svg>
+        <div class="pod-node-title">Data Engineer 1</div>
+      </div>
+      <div class="pod-node pod-node-eng">
+        <svg class="ico pod-ico"><use href="#i-git-branch"/></svg>
+        <div class="pod-node-title">Data Engineer 2</div>
+      </div>
+      <div class="pod-node pod-node-eng">
+        <svg class="ico pod-ico"><use href="#i-bar-chart-2"/></svg>
+        <div class="pod-node-title">Power BI Engineer 1</div>
+      </div>
+      <div class="pod-node pod-node-eng">
+        <svg class="ico pod-ico"><use href="#i-trending-up"/></svg>
+        <div class="pod-node-title">Power BI Engineer 2</div>
+      </div>
+    </div>
+
+    <!-- Connector: engineers → unified caption block -->
+    <div class="pod-h-connector">
+      <div class="pod-h-drops pod-h-drops-up">
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+      </div>
+      <div class="pod-h-line"></div>
+    </div>
+
+    <!-- Row 4: Unified capabilities block -->
+    <div class="pod-row pod-row-full">
+      <div class="pod-caps-block">
+        <span class="pod-cap">ETL &middot; Pipelines</span>
+        <span class="pod-cap-div"></span>
+        <span class="pod-cap">Stored-proc modernisation</span>
+        <span class="pod-cap-div"></span>
+        <span class="pod-cap">Modelling &middot; Fabric</span>
+        <span class="pod-cap-div"></span>
+        <span class="pod-cap">Reporting &middot; Rendering</span>
+      </div>
+    </div>
+
+    <!-- Connector: caps → hub -->
+    <div class="pod-connector-v"></div>
+
+    <!-- Row 5: Hub -->
+    <div class="pod-row pod-row-center">
+      <div class="pod-node pod-node-hub">
+        All four engineers &middot; every module
+      </div>
+    </div>
+
+    <!-- Connector: hub → systems -->
+    <div class="pod-h-connector pod-h-connector-2">
+      <div class="pod-h-line"></div>
+      <div class="pod-h-drops">
+        <div class="pod-h-drop"></div>
+        <div class="pod-h-drop"></div>
+      </div>
+    </div>
+
+    <!-- Band label 2 -->
+    <div class="pod-band-label">2 &middot; RRTS SYSTEMS WE TOUCH</div>
+
+    <!-- Row 6: Systems -->
+    <div class="pod-row pod-row-2">
+      <div class="pod-node pod-node-sys pod-node-sys-blue">
+        <svg class="ico pod-ico"><use href="#i-bar-chart-2"/></svg>
+        <div class="pod-node-title">SAFX Reports</div>
+      </div>
+      <div class="pod-node pod-node-sys pod-node-sys-teal">
+        <svg class="ico pod-ico" style="color:var(--teal)"><use href="#i-layers"/></svg>
+        <div class="pod-node-title">Line Haul Model</div>
+        <div class="pod-node-sub pod-node-sub-teal">Nearing commencement</div>
+      </div>
+    </div>
+
+    <!-- Animated SVG overlay — pure geometry only, no foreignObject -->
+    <svg class="pod-anim-svg" id="pod-anim-svg" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <path id="p-pe1" d="M530,152 C530,164 145,164 145,172"/>
-        <path id="p-pe2" d="M563,152 C563,164 435,164 435,172"/>
-        <path id="p-pe3" d="M637,152 C637,164 725,164 725,172"/>
-        <path id="p-pe4" d="M670,152 C670,164 1015,164 1015,172"/>
-        <path id="p-eh1" d="M145,224 C145,234 540,228 540,238"/>
-        <path id="p-eh2" d="M435,224 C435,233 580,229 580,238"/>
-        <path id="p-eh3" d="M725,224 C725,233 620,229 620,238"/>
-        <path id="p-eh4" d="M1015,224 C1015,234 660,228 660,238"/>
-        <path id="p-hs1" d="M340,270 C340,280 380,278 380,288"/>
-        <path id="p-hs2" d="M860,270 C860,280 820,278 820,288"/>
-        <path id="p-hx1" d="M480,322 C480,348 350,346 350,372"/>
-        <path id="p-hx2" d="M720,322 C720,348 850,346 850,372"/>
         <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="2.5" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -601,141 +736,13 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-
-      <text x="20" y="22" class="band-label">1 · THE POD · 4 ENGINEERS + 1 PM</text>
-
-      <!-- Row 1: Prowesstics leadership y=30 -->
-      <g class="arch-node">
-        <foreignObject x="450" y="30" width="300" height="48">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="padding:8px 14px;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--paper)">
-            <div class="node-sub" style="font-size:11px;margin:0">Delivery governance</div>
-            <div class="node-title" style="font-size:12.5px">Prowesstics leadership</div>
-          </div>
-        </foreignObject>
-      </g>
-
-      <!-- Row 2: Pandu y=96 (gap +18 from row 1 bottom) -->
-      <g class="arch-node">
-        <foreignObject x="500" y="84" width="200" height="68">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="border-color:var(--blue);background:var(--blue-pale);align-items:center;text-align:center">
-            <div class="node-icon"><svg class="ico"><use href="#i-user"/></svg></div>
-            <div class="node-title" style="color:var(--blue-deep);font-size:12.5px">Pandu · PM</div>
-            <div class="node-sub">governs delivery rhythm</div>
-          </div>
-        </foreignObject>
-      </g>
-
-      <!-- Row 3: 4 Engineers y=172 (gap +18 from row 2 bottom) -->
-      <g class="arch-node">
-        <foreignObject x="40" y="172" width="210" height="52">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
-            <div class="node-icon"><svg class="ico"><use href="#i-server"/></svg></div>
-            <div class="node-title" style="font-size:12.5px">Data Engineer 1</div>
-          </div>
-        </foreignObject>
-      </g>
-      <g class="arch-node">
-        <foreignObject x="330" y="172" width="210" height="52">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
-            <div class="node-icon"><svg class="ico"><use href="#i-git-branch"/></svg></div>
-            <div class="node-title" style="font-size:12.5px">Data Engineer 2</div>
-          </div>
-        </foreignObject>
-      </g>
-      <g class="arch-node">
-        <foreignObject x="620" y="172" width="210" height="52">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
-            <div class="node-icon"><svg class="ico"><use href="#i-bar-chart-2"/></svg></div>
-            <div class="node-title" style="font-size:12.5px">Power BI Engineer 1</div>
-          </div>
-        </foreignObject>
-      </g>
-      <g class="arch-node">
-        <foreignObject x="910" y="172" width="210" height="52">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
-            <div class="node-icon"><svg class="ico"><use href="#i-trending-up"/></svg></div>
-            <div class="node-title" style="font-size:12.5px">Power BI Engineer 2</div>
-          </div>
-        </foreignObject>
-      </g>
-
-      <!-- Row 4: Unified shared capabilities block -->
-      <g>
-        <foreignObject x="40" y="238" width="1120" height="32">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;height:100%;background:#F1F5F9;border:1px solid #CBD5E1;border-radius:8px;box-sizing:border-box;overflow:hidden">
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">ETL &middot; Pipelines</div>
-            <div style="width:1px;height:60%;background:#CBD5E1;flex-shrink:0"></div>
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">Stored-proc modernisation</div>
-            <div style="width:1px;height:60%;background:#CBD5E1;flex-shrink:0"></div>
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">Modelling &middot; Fabric</div>
-            <div style="width:1px;height:60%;background:#CBD5E1;flex-shrink:0"></div>
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">Reporting &middot; Rendering</div>
-          </div>
-        </foreignObject>
-      </g>
-
-      <!-- Row 5: Hub y=288 (gap +18 from row 4 bottom) -->
-      <g class="arch-node">
-        <foreignObject x="380" y="288" width="440" height="34">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="background:#1E3A8A;border:none;align-items:center;justify-content:center;text-align:center">
-            <div class="node-title" style="color:#ffffff !important;font-weight:700;font-size:12.5px">All four engineers &middot; every module</div>
-          </div>
-        </foreignObject>
-      </g>
-
-      <!-- Band label row 6 -->
-      <text x="20" y="360" class="band-label">2 · RRTS SYSTEMS WE TOUCH</text>
-
-      <!-- Row 6: Systems y=372 (gap +18) -->
-      <g class="arch-node">
-        <foreignObject x="200" y="372" width="300" height="72">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="border-color:var(--blue)">
-            <div class="node-icon"><svg class="ico"><use href="#i-bar-chart-2"/></svg></div>
-            <div class="node-title" style="font-size:12.5px">SAFX Reports</div>
-          </div>
-        </foreignObject>
-      </g>
-      <g class="arch-node">
-        <foreignObject x="700" y="372" width="300" height="72">
-          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="border-color:var(--teal);padding:8px 10px">
-            <div class="node-icon"><svg class="ico"><use href="#i-layers"/></svg></div>
-            <div class="node-title" style="font-size:12.5px">Line Haul Model</div>
-            <div class="node-sub" style="color:var(--teal);font-weight:700;font-size:10.5px;margin-top:4px">Nearing commencement</div>
-          </div>
-        </foreignObject>
-      </g>
-
-      <use href="#p-pe1" class="flow-path blue"/>
-      <use href="#p-pe2" class="flow-path blue"/>
-      <use href="#p-pe3" class="flow-path blue"/>
-      <use href="#p-pe4" class="flow-path blue"/>
-      <use href="#p-eh1" class="flow-path blue"/>
-      <use href="#p-eh2" class="flow-path blue"/>
-      <use href="#p-eh3" class="flow-path blue"/>
-      <use href="#p-eh4" class="flow-path blue"/>
-      <use href="#p-hs1" class="flow-path violet"/>
-      <use href="#p-hs2" class="flow-path violet"/>
-      <use href="#p-hx1" class="flow-path violet"/>
-      <use href="#p-hx2" class="flow-path violet"/>
-
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="0s"><mpath href="#p-pe1"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="2.5s"><mpath href="#p-pe2"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="5s"><mpath href="#p-pe3"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="7.5s"><mpath href="#p-pe4"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="0s"><mpath href="#p-eh1"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="2.2s"><mpath href="#p-eh2"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="4.5s"><mpath href="#p-eh3"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="6.7s"><mpath href="#p-eh4"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="8s" repeatCount="indefinite" begin="0s"><mpath href="#p-hs1"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="8s" repeatCount="indefinite" begin="1.3s"><mpath href="#p-hs2"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="7s" repeatCount="indefinite" begin="0s"><mpath href="#p-hx1"/></animateMotion></circle>
-      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="7s" repeatCount="indefinite" begin="1s"><mpath href="#p-hx2"/></animateMotion></circle>
     </svg>
-    <div class="legend">
-      <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Daily delivery flow</div>
-      <div class="legend-item"><span class="legend-dot" style="background:var(--violet)"></span>Engineering pooled across modules</div>
-      <div class="legend-hint">Every box is clickable</div>
-    </div>
+
+  </div>
+
+  <div class="legend" style="margin-top:6px">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Daily delivery flow</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--violet)"></span>Engineering pooled across modules</div>
   </div>
 </section>
 
@@ -840,7 +847,10 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
 <div id="cap-panel">
   <div class="cap-panel-head">
     <div class="cap-panel-title">Capture Andrew</div>
-    <button class="cap-close" onclick="toggleCapture()">&times;</button>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button onclick="promptAdminPin()" style="font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);background:var(--paper);cursor:pointer;color:var(--ink-mid);font-family:var(--font)">🔒 Admin</button>
+      <button class="cap-close" onclick="toggleCapture()">&times;</button>
+    </div>
   </div>
   <div class="cap-panel-sub">Log what Andrew raises in real time. It flows straight to the closing slide and the July agenda.</div>
   <div class="cap-cats">
@@ -852,7 +862,10 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
   <textarea id="cap-input" placeholder="Type what Andrew said, one line..."></textarea>
   <button class="cap-save" onclick="saveCapture()">Save capture</button>
   <div class="cap-list" id="cap-list"></div>
-  <button class="cap-copy" onclick="copyCaptures()">Copy all for follow-up</button>
+  <div class="cap-footer">
+    <button class="cap-copy" onclick="copyCaptures()">Copy all for follow-up</button>
+    <button class="cap-copy" style="background:#FFF1F2;color:#E11D48;border:1px solid #FECDD3" onclick="clearCaptures()">Clear all</button>
+  </div>
 </div>
 
 <!-- ===== MODAL ===== -->
@@ -870,7 +883,94 @@ h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spac
 // ============================================================
 var SCENES = ['Cover','Heard & own','The pod','Muscle','Journey','Close'];
 var current = 0;
+// ── CLOUD CAPTURE CONFIG ─────────────────────
+// STEP 1: Open this file in any text editor
+// STEP 2: Replace the two values below with your real credentials
+// STEP 3: Save and upload to GitHub Pages
+var JSONBIN_KEY = 'PASTE_YOUR_X_MASTER_KEY_HERE';
+var JSONBIN_BIN = '6a399b51da38895dfeedcb73';
+var ADMIN_PIN   = 'PASTE_YOUR_4_DIGIT_PIN_HERE'; // e.g. '7382'
+
+// ── STATE ────────────────────────────────────
 var captures = [];
+var isAdmin  = false;
+var _pollTimer = null;
+
+// ── CLOUD READ/WRITE ─────────────────────────
+function cloudRead(cb){
+  fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_BIN+'/latest',{
+    headers:{'X-Master-Key':JSONBIN_KEY,'X-Bin-Meta':false}
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    captures = (d && d.captures) ? d.captures : [];
+    if(cb) cb();
+  })
+  .catch(function(){ if(cb) cb(); });
+}
+
+function cloudWrite(cb){
+  fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_BIN,{
+    method:'PUT',
+    headers:{
+      'Content-Type':'application/json',
+      'X-Master-Key':JSONBIN_KEY
+    },
+    body:JSON.stringify({captures:captures})
+  })
+  .then(function(r){return r.json();})
+  .then(function(){ if(cb) cb(); })
+  .catch(function(e){ console.error('Cloud write failed',e); });
+}
+
+function saveCapturesToStorage(){ cloudWrite(); }
+
+// ── POLL every 30s so viewers see live updates ─
+function startPoll(){
+  if(_pollTimer) clearInterval(_pollTimer);
+  _pollTimer = setInterval(function(){
+    cloudRead(function(){
+      renderCapList();
+      renderCloseCaptures();
+      document.getElementById('cap-count').textContent = captures.length;
+    });
+  }, 30000);
+}
+
+// ── PIN / ADMIN ───────────────────────────────
+function promptAdminPin(){
+  var pin = prompt('Enter admin PIN to enable editing:');
+  if(pin === ADMIN_PIN){
+    isAdmin = true;
+    document.body.classList.add('is-admin');
+    alert('Admin access granted. You can now add, edit and delete captures.');
+  } else {
+    alert('Incorrect PIN.');
+  }
+}
+
+function requireAdmin(fn){
+  if(isAdmin){ fn(); return; }
+  var pin = prompt('Admin PIN required:');
+  if(pin === ADMIN_PIN){
+    isAdmin = true;
+    document.body.classList.add('is-admin');
+    fn();
+  } else {
+    alert('Incorrect PIN. View only.');
+  }
+}
+function clearCaptures(){
+  requireAdmin(function(){
+    if(!confirm('Clear all captures? This cannot be undone.')) return;
+    captures=[];
+    cloudWrite(function(){
+      renderCapList();
+      renderCloseCaptures();
+      document.getElementById('cap-count').textContent = 0;
+    });
+  });
+}
 var selectedCat = 'improvement';
 var playing = false;
 var playTimer = null;
@@ -968,6 +1068,7 @@ function render(){
   if(current===5){ renderCloseCaptures(); }
   if(current===4){ renderJourney(jCurrent); }
   if(current===3){ countUp(); }
+  if(current===2){ setTimeout(animatePodBeads,150); }
 }
 function go(i){ if(i<0||i>=SCENES.length) return; current=i; render(); }
 function next(){ if(current<SCENES.length-1){ current++; render(); } }
@@ -1064,33 +1165,43 @@ function selCat(c){
   document.querySelectorAll('.cap-cat').forEach(function(b){ b.classList.toggle('sel', b.dataset.cat===c); });
 }
 function saveCapture(){
-  var input = document.getElementById('cap-input');
-  var text = input.value.trim();
-  if(!text) return;
-  captures.push({cat:selectedCat, text:text});
-  input.value='';
-  renderCapList();
-  renderCloseCaptures();
-  document.getElementById('cap-count').textContent = captures.length;
+  requireAdmin(function(){
+    var input = document.getElementById('cap-input');
+    var text = input.value.trim();
+    if(!text) return;
+    captures.push({cat:selectedCat, text:text});
+    input.value='';
+    cloudWrite(function(){
+      renderCapList();
+      renderCloseCaptures();
+      document.getElementById('cap-count').textContent = captures.length;
+    });
+  });
 }
 function deleteCapture(i){
-  captures.splice(i,1);
-  renderCapList();
-  renderCloseCaptures();
-  document.getElementById('cap-count').textContent = captures.length;
+  requireAdmin(function(){
+    captures.splice(i,1);
+    cloudWrite(function(){
+      renderCapList();
+      renderCloseCaptures();
+      document.getElementById('cap-count').textContent = captures.length;
+    });
+  });
 }
 function editCapture(i){
-  var c = captures[i];
-  var input = document.getElementById('cap-input');
-  input.value = c.text;
-  // set the category button
-  selectedCat = c.cat;
-  document.querySelectorAll('.cap-cat-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.cat===c.cat); });
-  // remove the item so saving replaces it (insert at same position)
-  captures.splice(i,1);
-  renderCapList();
-  document.getElementById('cap-count').textContent = captures.length;
-  input.focus();
+  requireAdmin(function(){
+    var c = captures[i];
+    var input = document.getElementById('cap-input');
+    input.value = c.text;
+    selectedCat = c.cat;
+    document.querySelectorAll('.cap-cat-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.cat===c.cat); });
+    captures.splice(i,1);
+    cloudWrite(function(){
+      renderCapList();
+      document.getElementById('cap-count').textContent = captures.length;
+    });
+    input.focus();
+  });
 }
 function renderCapList(){
   var list = document.getElementById('cap-list');
@@ -1136,9 +1247,105 @@ function copyCaptures(){
 }
 function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-// ============================================================
-// MODAL
-// ============================================================
+// ── POD HTML BEAD ANIMATOR ────────────────────
+function animatePodBeads(){
+  var wrap = document.getElementById('pod-html');
+  var svg  = document.getElementById('pod-anim-svg');
+  if(!wrap || !svg) return;
+  svg.innerHTML = '';
+  var wr = wrap.getBoundingClientRect();
+
+  function cx(el){ var r=el.getBoundingClientRect(); return r.left+r.width/2-wr.left; }
+  function cy(el){ var r=el.getBoundingClientRect(); return r.top+r.height/2-wr.top; }
+  function top(el){ var r=el.getBoundingClientRect(); return r.top-wr.top; }
+  function bot(el){ var r=el.getBoundingClientRect(); return r.top+r.height-wr.top; }
+  function left(el){ var r=el.getBoundingClientRect(); return r.left-wr.left; }
+  function right(el){ var r=el.getBoundingClientRect(); return r.left+r.width-wr.left; }
+
+  var nodes = wrap.querySelectorAll('.pod-node');
+  var gov=nodes[0], pandu=nodes[1], de1=nodes[2], de2=nodes[3], pbi1=nodes[4], pbi2=nodes[5];
+  var hub=nodes[6], safx=nodes[7], lhm=nodes[8];
+  var caps=wrap.querySelector('.pod-caps-block');
+
+  // glow filters
+  svg.innerHTML = '<defs>'
+    +'<filter id="hgb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    +'<filter id="hgv" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    +'</defs>';
+
+  var ns='http://www.w3.org/2000/svg';
+
+  function makePath(d, color, cls){
+    var p=document.createElementNS(ns,'path');
+    p.setAttribute('d',d); p.setAttribute('fill','none');
+    p.setAttribute('stroke',color); p.setAttribute('stroke-width','1.4');
+    p.setAttribute('stroke-dasharray','5 5'); p.setAttribute('opacity','0.6');
+    p.setAttribute('class',cls||'');
+    svg.appendChild(p); return p;
+  }
+
+  function makeBead(pathEl, color, filter, dur, begin){
+    var c=document.createElementNS(ns,'circle');
+    c.setAttribute('r','3.5'); c.setAttribute('fill',color);
+    c.setAttribute('filter',filter);
+    var am=document.createElementNS(ns,'animateMotion');
+    am.setAttribute('dur',dur+'s'); am.setAttribute('repeatCount','indefinite');
+    am.setAttribute('begin',begin+'s'); am.setAttribute('calcMode','linear');
+    var mp=document.createElementNS(ns,'mpath');
+    var id='bp'+Math.random().toString(36).slice(2);
+    pathEl.id=id; mp.setAttribute('href','#'+id);
+    am.appendChild(mp); c.appendChild(am); svg.appendChild(c);
+  }
+
+  function curve(x1,y1,x2,y2){
+    var mx=(x1+x2)/2, my=(y1+y2)/2;
+    return 'M'+x1+','+y1+' C'+x1+','+(y1+30)+' '+x2+','+(y2-30)+' '+x2+','+y2;
+  }
+
+  // Pandu → 4 engineers
+  var pandBotY = bot(pandu);
+  var offsets = [cx(de1),cx(de2),cx(pbi1),cx(pbi2)];
+  var pandXs  = [cx(pandu)-30, cx(pandu)-10, cx(pandu)+10, cx(pandu)+30];
+  var engs    = [de1,de2,pbi1,pbi2];
+  engs.forEach(function(e,i){
+    var d=curve(pandXs[i],pandBotY,cx(e),top(e));
+    var p=makePath(d,'#2563EB');
+    makeBead(p,'#2563EB','url(#hgb)',10,i*2.5);
+  });
+
+  // Engineers → caps block
+  var capsTopY = top(caps);
+  var capsCenterX = cx(caps);
+  engs.forEach(function(e,i){
+    var d=curve(cx(e),bot(e),capsCenterX+(i-1.5)*60,capsTopY);
+    var p=makePath(d,'#2563EB');
+    makeBead(p,'#2563EB','url(#hgb)',9,i*2.2);
+  });
+
+  // Caps → hub
+  var capBotY = bot(caps);
+  var hubTopY = top(hub);
+  [[cx(caps)-60,cx(hub)-40],[cx(caps)+60,cx(hub)+40]].forEach(function(pts,i){
+    var d=curve(pts[0],capBotY,pts[1],hubTopY);
+    var p=makePath(d,'#7C3AED');
+    makeBead(p,'#7C3AED','url(#hgv)',8,i*1.3);
+  });
+
+  // Hub → systems
+  var hubBotY = bot(hub);
+  [[cx(hub),cx(safx)],[cx(hub),cx(lhm)]].forEach(function(pts,i){
+    var d=curve(pts[0],hubBotY,pts[1],top(i===0?safx:lhm));
+    var p=makePath(d,'#7C3AED');
+    makeBead(p,'#7C3AED','url(#hgv)',7,i*1);
+  });
+}
+
+// Run on load and on resize
+window.addEventListener('load', function(){ setTimeout(animatePodBeads,200); });
+window.addEventListener('resize', animatePodBeads);
+// Also run when pod scene becomes visible
+var _origGo = typeof go === 'function' ? go : null;
+
 function modal(title, body){
   document.getElementById('modal-title').textContent = title;
   document.getElementById('modal-body').textContent = body;
@@ -1200,6 +1407,14 @@ buildJourneyTabs();
 renderJourney(3);
 selCat('improvement');
 (function(){var pd=document.querySelector('.pod-diagram');if(pd){var b=pd.querySelectorAll('.pod-band');for(var i=b.length-1;i>=1;i--){var d=document.createElement('div');d.className='pod-conn';pd.insertBefore(d,b[i]);}}})();
+
+// Restore persisted captures on load
+cloudRead(function(){
+  renderCapList();
+  renderCloseCaptures();
+  document.getElementById('cap-count').textContent = captures.length;
+});
+startPoll();
 
 render();
 </script>
