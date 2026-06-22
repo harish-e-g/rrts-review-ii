@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RRTS x Prowesstics - Partnership Review No. 02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RRTS x PROWESSTICS - PARTNERSHIP REVIEW #02
+   Single clean stylesheet. Static-first. UAT-reference quality.
+   ============================================================ */
+:root{
+  --blue:#2563EB; --blue-deep:#1E3A8A; --blue-pale:#DBEAFE;
+  --violet:#7C3AED; --violet-deep:#5B21B6; --violet-pale:#EDE9FE;
+  --teal:#0D9488; --teal-deep:#0F766E; --teal-pale:#CCFBF1;
+  --gold:#D97706; --gold-deep:#92400E; --gold-pale:#FEF3C7;
+  --coral:#E11D48; --coral-deep:#9F1239; --coral-pale:#FEE2E2;
+  --green:#16A34A; --green-deep:#15803D; --green-pale:#DCFCE7;
+  --ink:#0F172A; --ink-soft:#1E293B; --ink-mid:#334155;
+  --paper:#F8FAFC; --surface:#FFFFFF; --border:#E2E8F0; --border-soft:#EEF2F6;
+  --shadow:0 4px 16px rgba(15,23,42,.07);
+  --shadow-lg:0 12px 32px rgba(15,23,42,.12);
+  --font:'Avenir Next','Avenir Next LT Pro','Avenir','Manrope','Segoe UI',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;font-family:var(--font);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scrollbar-gutter:stable;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+
+/* ---------- TOP BAR ---------- */
+#topbar{position:fixed;top:0;left:0;right:0;height:56px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;padding:0 24px;z-index:100}
+.brand-logo{height:24px;width:auto;display:block;flex-shrink:0}
+.brand-divider{width:1px;height:20px;background:var(--border)}
+.brand-text{font-size:12px;font-weight:700;color:var(--blue-deep);letter-spacing:.01em;white-space:nowrap}
+.tabs{display:flex;gap:3px;flex:1;justify-content:center;flex-wrap:nowrap;overflow:hidden}
+.tab{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:11.5px;font-weight:600;color:var(--ink-mid);background:transparent;border:none;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+.tab:hover{background:var(--paper)}
+.tab.active{background:var(--blue);color:#fff;font-weight:700}
+.tab-num{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:var(--border);color:var(--ink-mid);font-size:9px;font-weight:700;flex-shrink:0}
+.tab.active .tab-num{background:rgba(255,255,255,.28);color:#fff}
+.topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+#capture-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--blue-deep);color:#fff;border:none;cursor:pointer;font-size:11.5px;font-weight:700;font-family:var(--font);white-space:nowrap;box-shadow:0 2px 8px rgba(30,58,138,.25);transition:background .15s,transform .15s}
+#capture-btn:hover{background:var(--blue);transform:translateY(-1px)}
+#capture-btn .cap-dot{width:6px;height:6px;border-radius:50%;background:#FBBF24;flex-shrink:0;animation:softpulse 2.4s ease-in-out infinite}
+#capture-btn .cap-count{background:rgba(255,255,255,.25);border-radius:999px;padding:1px 7px;font-size:9.5px;font-weight:700;min-width:18px;text-align:center}
+@keyframes softpulse{0%,100%{opacity:1}50%{opacity:.4}}
+#play-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;background:#fff;color:var(--blue-deep);border:1.5px solid var(--blue);cursor:pointer;font-size:11.5px;font-weight:700;font-family:var(--font);white-space:nowrap;transition:background .15s}
+#play-btn:hover{background:var(--blue-pale)}
+
+/* ---------- MAIN / SCENES ---------- */
+main{position:fixed;top:56px;bottom:56px;left:0;right:0;overflow:hidden}
+.scene{display:none;flex-direction:column;height:100%;padding:clamp(18px,2.4vh,30px) clamp(28px,4vw,56px);overflow:hidden;animation:fadein .5s ease}
+.scene.active{display:flex}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:clamp(10px,.9vw,11px);font-weight:700;letter-spacing:.16em;color:var(--blue-deep);text-transform:uppercase;flex-shrink:0;margin-bottom:6px}
+h1{font-size:clamp(34px,4.6vw,62px);font-weight:700;line-height:1.02;letter-spacing:-.02em;color:var(--ink);flex-shrink:0}
+h2{font-size:clamp(24px,2.8vw,36px);font-weight:700;line-height:1.08;letter-spacing:-.01em;color:var(--ink);flex-shrink:0;margin-bottom:4px}
+.lead{font-size:clamp(13px,1.15vw,15px);font-weight:500;line-height:1.5;color:var(--ink-soft);flex-shrink:0;max-width:920px}
+
+/* ---------- SCENE 1 COVER ---------- */
+.cover-top{flex-shrink:0}
+.cover-h1{font-size:clamp(38px,5.4vw,72px);font-weight:700;line-height:1;letter-spacing:-.025em;color:var(--ink);margin:8px 0 6px}
+.cover-h1 .accent{color:var(--blue)}
+.cover-date{font-size:clamp(16px,1.5vw,20px);font-weight:700;color:var(--ink-soft);margin-bottom:14px}
+.cover-strap{font-size:clamp(14px,1.3vw,17px);font-weight:600;font-style:italic;color:var(--ink);padding-left:14px;border-left:3px solid var(--blue);line-height:1.45;max-width:880px}
+.cover-agenda{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(10px,1.6vh,20px) 0}
+.agenda-label{font-size:clamp(10px,.9vw,11px);font-weight:700;letter-spacing:.16em;color:var(--blue-deep);margin-bottom:12px}
+.agenda-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.agenda-card{background:var(--surface);border:2px solid;border-radius:14px;padding:clamp(14px,1.6vw,20px);cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;min-height:0}
+.agenda-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.agenda-card[data-c=coral]{border-color:var(--coral)}
+.agenda-card[data-c=gold]{border-color:var(--gold)}
+.agenda-card[data-c=blue]{border-color:var(--blue)}
+.agenda-card[data-c=green]{border-color:var(--green)}
+.agenda-num{font-size:10px;font-weight:700;letter-spacing:.14em;margin-bottom:9px}
+.agenda-card[data-c=coral] .agenda-num{color:var(--coral-deep)}
+.agenda-card[data-c=gold] .agenda-num{color:var(--gold-deep)}
+.agenda-card[data-c=blue] .agenda-num{color:var(--blue-deep)}
+.agenda-card[data-c=green] .agenda-num{color:var(--green-deep)}
+.agenda-name{font-size:clamp(15px,1.4vw,18px);font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:6px}
+.agenda-brief{font-size:clamp(11px,1vw,13px);font-weight:500;color:var(--ink-soft);line-height:1.4}
+.cover-attendees{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex-shrink:0}
+.att-card{background:linear-gradient(135deg,var(--blue-pale),rgba(219,234,254,.5));border:1.5px solid rgba(37,99,235,.28);border-radius:12px;padding:13px 18px}
+.att-label{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--blue-deep);margin-bottom:4px}
+.att-names{font-size:clamp(13px,1.2vw,15px);font-weight:700;color:var(--ink)}
+
+/* ---------- GENERIC GRID + CARDS ---------- */
+.content-area{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,1.6vh,18px);padding-top:clamp(10px,1.4vh,16px)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;align-items:stretch}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:clamp(14px,1.5vw,20px);box-shadow:var(--shadow);display:flex;flex-direction:column;height:100%}
+
+/* ---------- SCENE 2 QUOTES ---------- */
+.quote-card{border-left:4px solid var(--coral)}
+.quote-mark{font-size:34px;font-weight:700;color:var(--coral);line-height:.6;margin-bottom:10px}
+.quote-text{font-size:clamp(13px,1.2vw,15px);font-weight:500;color:var(--ink);line-height:1.45;flex:1}
+.quote-src{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--coral-deep);margin-top:14px}
+/* mapping panel */
+.map-panel{background:linear-gradient(180deg,rgba(225,29,72,.04),rgba(225,29,72,.07));border:1.5px solid rgba(225,29,72,.2);border-radius:14px;padding:clamp(14px,1.8vw,22px);flex-shrink:0}
+.map-head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px}
+.tag{display:inline-flex;align-items:center;padding:5px 13px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.1em}
+.tag.coral{background:var(--coral);color:#fff}
+.tag.blue{background:var(--blue);color:#fff}
+.tag.gold{background:var(--gold);color:#fff}
+.tag.green{background:var(--green);color:#fff}
+.map-arrow{color:var(--ink);font-weight:700;font-size:17px}
+.map-rows{display:flex;flex-direction:column;gap:10px}
+.map-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;background:var(--surface);border-radius:10px;padding:11px 16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.map-input{display:flex;flex-direction:column;gap:2px}
+.map-input-name{font-size:clamp(13px,1.15vw,15px);font-weight:700;color:var(--ink)}
+.map-input-quote{font-size:11px;font-weight:500;color:var(--ink-mid);font-style:italic}
+.map-line{height:2px;background:repeating-linear-gradient(90deg,var(--coral) 0 6px,transparent 6px 12px);opacity:.4;min-width:60px}
+.map-status{display:inline-flex;align-items:center;gap:8px;font-size:clamp(12px,1.1vw,13.5px);font-weight:700;white-space:nowrap}
+.map-badge{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.map-badge.live{background:var(--blue-pale);color:var(--blue-deep)}
+.map-badge.prog{background:var(--gold-pale);color:var(--gold-deep)}
+.reflection{background:var(--blue-pale);border-left:4px solid var(--blue);border-radius:10px;padding:13px 20px;flex-shrink:0}
+.reflection p{font-size:clamp(12px,1.15vw,14px);font-weight:600;font-style:italic;color:var(--blue-deep);line-height:1.45}
+
+/* ---------- SCENE 3 OWN ---------- */
+.own-card{border-top:4px solid var(--coral)}
+.own-num{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--coral-deep);margin-bottom:8px}
+.own-title{font-size:clamp(16px,1.5vw,19px);font-weight:700;color:var(--ink);margin-bottom:11px}
+.own-status{display:inline-flex;align-self:flex-start;padding:4px 11px;border-radius:999px;background:var(--gold-pale);color:var(--gold-deep);font-size:10px;font-weight:700;letter-spacing:.06em;margin-bottom:12px}
+.own-fixlabel{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--blue-deep);margin-bottom:6px}
+.own-fix{font-size:clamp(12px,1.1vw,13.5px);font-weight:500;color:var(--ink);line-height:1.45;flex:1}
+/* gap to fix strip */
+.flow-strip{background:linear-gradient(180deg,rgba(217,119,6,.05),rgba(217,119,6,.09));border:1.5px solid rgba(217,119,6,.22);border-radius:14px;padding:clamp(14px,1.8vw,22px);flex-shrink:0}
+.flow-rows{display:flex;flex-direction:column;gap:10px}
+.flow-row{display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:14px;background:var(--surface);border-radius:10px;padding:11px 16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.flow-gap{font-size:clamp(13px,1.15vw,15px);font-weight:700;color:var(--ink)}
+.flow-fix{font-size:clamp(12px,1.05vw,13px);font-weight:500;color:var(--ink-soft);line-height:1.35}
+.flow-line{height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 6px,transparent 6px 12px);opacity:.4;min-width:40px}
+.flow-badge{width:26px;height:26px;border-radius:50%;background:var(--green-pale);color:var(--green-deep);display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.flow-motion{font-size:clamp(11px,1vw,13px);font-weight:700;color:var(--green-deep);white-space:nowrap}
+
+/* ---------- SCENE 4 POD (3 bands) ---------- */
+.pod-diagram{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);justify-content:center}
+.pod-band{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:clamp(12px,1.4vw,18px);box-shadow:var(--shadow)}
+.band-tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:11px;color:#fff}
+.band-tag.blue{background:var(--blue)}
+.band-tag.violet{background:var(--violet)}
+.band-tag.gold{background:var(--gold)}
+.pod-row{display:flex;gap:10px;flex-wrap:wrap}
+.pod-card{flex:1 1 0;min-width:0;border:1px solid var(--border);border-radius:10px;padding:11px 13px;cursor:pointer;transition:border-color .15s,transform .15s,box-shadow .15s;background:var(--surface)}
+.pod-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--blue)}
+.pod-card.lead-card{background:var(--blue-pale);border-color:var(--blue);flex:1.4 1 0}
+.pod-card.system{background:var(--violet-pale);border-color:rgba(124,58,237,.3)}
+.pod-card.lang{background:var(--gold-pale);border-color:rgba(217,119,6,.3)}
+.pod-card-top{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.pod-icon{font-size:16px;flex-shrink:0}
+.pod-name{font-size:clamp(12px,1.15vw,14px);font-weight:700;color:var(--ink);line-height:1.15}
+.pod-sub{font-size:clamp(10px,.95vw,12px);font-weight:500;color:var(--ink-mid);line-height:1.3}
+.cadence-strip{margin-top:10px;background:var(--blue-pale);border-radius:8px;padding:8px 14px;text-align:center;font-size:clamp(11px,1.05vw,13px);font-weight:700;color:var(--blue-deep)}
+.pod-legend{display:flex;gap:24px;justify-content:center;flex-shrink:0;padding-top:8px}
+.legend-item{display:inline-flex;align-items:center;gap:7px;font-size:clamp(11px,1vw,13px);font-weight:600;color:var(--ink)}
+.legend-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+
+/* ---------- SCENE 5 MUSCLE ---------- */
+.metric-card{border-top:4px solid var(--blue)}
+.metric-card[data-c=violet]{border-top-color:var(--violet)}
+.metric-card[data-c=teal]{border-top-color:var(--teal)}
+.metric-card[data-c=green]{border-top-color:var(--green)}
+.metric-label{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--blue-deep);margin-bottom:9px}
+.metric-card[data-c=violet] .metric-label{color:var(--violet-deep)}
+.metric-card[data-c=teal] .metric-label{color:var(--teal-deep)}
+.metric-card[data-c=green] .metric-label{color:var(--green-deep)}
+.metric-value{font-size:clamp(28px,3.2vw,40px);font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:10px}
+.metric-value .small{font-size:.55em;font-weight:700}
+.metric-value .strike{text-decoration:line-through;opacity:.4;font-weight:700}
+.metric-value .arr{color:var(--blue);margin:0 6px}
+.metric-sub{font-size:clamp(11px,1.05vw,13px);font-weight:500;color:var(--ink-soft);line-height:1.4;flex:1}
+.muscle-headline{background:linear-gradient(135deg,var(--blue-deep),#172554);border-radius:16px;padding:clamp(18px,2.4vw,30px);text-align:center;flex-shrink:0;box-shadow:var(--shadow-lg)}
+.muscle-headline-text{font-size:clamp(17px,1.9vw,24px);font-weight:700;color:#fff;line-height:1.2}
+.muscle-headline-sub{font-size:clamp(11px,1.1vw,13.5px);font-weight:500;font-style:italic;color:var(--blue-pale);line-height:1.45;margin-top:10px}
+
+/* ---------- SCENE 6 LOOP (3 cols) ---------- */
+.loop-diagram{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(14px,2vw,28px);align-items:center}
+.loop-col{display:flex;flex-direction:column;gap:clamp(10px,1.4vh,16px);height:100%;justify-content:center}
+.loop-coltag{font-size:10px;font-weight:700;letter-spacing:.14em;margin-bottom:2px}
+.loop-col.inputs .loop-coltag{color:var(--blue-deep)}
+.loop-col.outputs .loop-coltag{color:var(--green-deep);text-align:right}
+.loop-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 16px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.loop-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.loop-col.inputs .loop-card{border-left:4px solid var(--blue)}
+.loop-col.outputs .loop-card{border-right:4px solid var(--green);text-align:right}
+.loop-card-name{display:flex;align-items:center;gap:8px;font-size:clamp(13px,1.2vw,15px);font-weight:700;color:var(--ink);margin-bottom:3px}
+.loop-col.outputs .loop-card-name{justify-content:flex-end}
+.loop-card-sub{font-size:clamp(11px,1vw,12.5px);font-weight:500;color:var(--ink-mid)}
+.loop-hub-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.loop-arrows{font-size:22px;color:var(--blue);font-weight:700;letter-spacing:-2px}
+.loop-hub{background:linear-gradient(135deg,var(--violet),var(--violet-deep));border-radius:18px;padding:clamp(20px,2.6vw,34px) clamp(18px,2.2vw,28px);text-align:center;box-shadow:0 12px 32px rgba(124,58,237,.35);max-width:230px}
+.loop-hub-title{font-size:clamp(14px,1.5vw,18px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px}
+.loop-hub-sub{font-size:clamp(10px,1vw,12px);font-weight:500;color:rgba(255,255,255,.92);line-height:1.35}
+
+/* ---------- SCENE 7 JOURNEY ---------- */
+.j-tabs{display:flex;gap:6px;background:var(--paper);border:1px solid var(--border);border-radius:12px;padding:5px;flex-shrink:0;overflow-x:auto}
+.j-tab{flex:1;min-width:110px;padding:8px 12px;border-radius:8px;border:none;background:transparent;cursor:pointer;font-size:clamp(11px,1.05vw,13px);font-weight:600;color:var(--ink-mid);white-space:nowrap;transition:background .15s,color .15s;font-family:var(--font)}
+.j-tab:hover{background:var(--surface)}
+.j-tab.active{background:var(--blue);color:#fff;font-weight:700}
+.j-body{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,32px);padding:clamp(12px,1.8vh,20px) 0;align-items:stretch}
+.j-narrative{display:flex;flex-direction:column;min-height:0}
+.j-label{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--blue-deep);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.j-here{background:var(--coral-pale);color:var(--coral-deep);padding:3px 9px;border-radius:999px;font-size:9px;font-weight:700;letter-spacing:.06em}
+.j-title{font-size:clamp(20px,2.4vw,30px);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:12px}
+.j-text{font-size:clamp(12px,1.2vw,14.5px);font-weight:500;color:var(--ink-soft);line-height:1.55}
+.j-glance{margin-top:auto;padding-top:14px}
+.j-glance-label{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--blue-deep);margin-bottom:9px}
+.j-glance-item{display:flex;align-items:center;gap:9px;font-size:clamp(11px,1.05vw,13px);font-weight:500;color:var(--ink);margin-bottom:6px}
+.j-glance-ic{width:19px;height:19px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:#fff}
+.j-glance-item.done .j-glance-ic{background:var(--green)}
+.j-glance-item.active .j-glance-ic{background:var(--gold)}
+.j-snap{background:var(--paper);border:1px solid var(--border);border-radius:16px;padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;min-height:0}
+.j-snap-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;flex-shrink:0}
+.j-snap-stagenum{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--blue-deep);margin-bottom:8px}
+.j-snap-iconrow{display:flex;align-items:center;gap:10px}
+.j-snap-icon{width:48px;height:48px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(15,23,42,.18)}
+.j-snap-of{font-size:14px;font-weight:700;color:var(--ink-soft)}
+.j-snap-pill{background:var(--coral-pale);color:var(--coral-deep);padding:5px 11px;border-radius:999px;font-size:9px;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.j-snap-nodes{flex:1;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.j-snap-node{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;border-left:4px solid}
+.j-snap-node-ic{width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.j-snap-node-label{font-size:clamp(13px,1.3vw,15px);font-weight:700;color:var(--ink);line-height:1.25}
+.j-snap-prog{padding-top:14px;border-top:1px solid var(--border);flex-shrink:0}
+.j-snap-prog-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.j-snap-prog-label{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--ink-soft)}
+.j-snap-prog-pct{font-size:18px;font-weight:700}
+.j-snap-prog-bar{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+.j-snap-prog-fill{height:100%;border-radius:999px;transition:width .4s ease}
+/* journey timeline */
+.j-timeline{flex-shrink:0;padding-top:clamp(10px,1.6vh,16px);border-top:1px solid var(--border-soft)}
+.j-tl-label{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--ink-soft);margin-bottom:12px}
+.j-tl-track{position:relative;display:flex;justify-content:space-between;align-items:flex-start}
+.tl-ecg{position:absolute;top:1px;left:0;width:100%;height:auto;z-index:0;pointer-events:none}
+.tl-ecg-line{fill:none;stroke:rgba(37,99,235,.32);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:ecgdraw 2.8s ease .2s forwards}
+.tl-ecg-bead{fill:var(--blue);filter:drop-shadow(0 0 3px rgba(37,99,235,.7))}
+.j-tl-stage{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex:1}
+.j-tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--surface);border:2px solid var(--border);transition:transform .15s}
+.j-tl-stage:hover .j-tl-dot{transform:scale(1.1)}
+.j-tl-stage.cur .j-tl-dot{border-color:var(--coral);box-shadow:0 0 0 4px rgba(225,29,72,.15);animation:ring 3.2s ease-out infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(225,29,72,.4)}70%{box-shadow:0 0 0 10px rgba(225,29,72,0)}100%{box-shadow:0 0 0 0 rgba(225,29,72,0)}}
+.j-tl-name{font-size:clamp(10px,1vw,12px);font-weight:700;color:var(--ink)}
+.j-tl-stage.cur .j-tl-name{color:var(--coral-deep)}
+.j-tl-here{font-size:8px;font-weight:700;letter-spacing:.1em;color:var(--coral);margin-bottom:-2px}
+
+/* ---------- SCENE 8 COMMIT ---------- */
+.commit-card{border-left:4px solid var(--blue)}
+.commit-card[data-c=violet]{border-left-color:var(--violet)}
+.commit-card[data-c=gold]{border-left-color:var(--gold)}
+.commit-card[data-c=green]{border-left-color:var(--green)}
+.commit-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:9px}
+.commit-num{font-size:clamp(24px,2.6vw,32px);font-weight:700;line-height:1;flex-shrink:0}
+.commit-card[data-c=blue] .commit-num{color:var(--blue)}
+.commit-card[data-c=violet] .commit-num{color:var(--violet)}
+.commit-card[data-c=gold] .commit-num{color:var(--gold)}
+.commit-card[data-c=green] .commit-num{color:var(--green)}
+.commit-title{font-size:clamp(15px,1.4vw,18px);font-weight:700;color:var(--ink);line-height:1.2;padding-top:2px}
+.commit-body{font-size:clamp(12px,1.1vw,13.5px);font-weight:500;color:var(--ink);line-height:1.45;flex:1}
+.commit-owner{align-self:flex-start;margin-top:11px;padding:5px 12px;border-radius:999px;background:var(--blue-pale);color:var(--blue-deep);font-size:10px;font-weight:700;letter-spacing:.04em}
+.commit-footer{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:14px;background:var(--blue-pale);border-radius:12px;padding:12px 22px}
+.commit-footer-text{font-size:clamp(12px,1.15vw,14px);font-weight:700;color:var(--blue-deep)}
+
+/* ---------- SCENE 9 CLOSE ---------- */
+.close-card{height:100%;display:flex;flex-direction:column}
+.close-card.captured{border-top:4px solid var(--coral)}
+.close-card.commits{border-top:4px solid var(--green)}
+.close-head{display:flex;align-items:center;gap:9px;font-size:clamp(14px,1.4vw,17px);font-weight:700;color:var(--ink);margin-bottom:12px;flex-shrink:0}
+.close-list{flex:1;display:flex;flex-direction:column;gap:0;justify-content:space-evenly;overflow-y:auto;min-height:0}
+.close-item{background:var(--paper);border-radius:9px;padding:13px 16px}
+.close-item-cat{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--ink-mid);margin-bottom:5px}
+.close-item-text{font-size:clamp(13px,1.25vw,15px);font-weight:600;color:var(--ink);line-height:1.45}
+.close-empty{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ink-mid);font-size:clamp(11px,1.1vw,13px);font-weight:500;font-style:italic;line-height:1.5;padding:20px}
+.close-item.cat-blocker{border-left:3px solid var(--coral)}
+.close-item.cat-improvement{border-left:3px solid var(--blue)}
+.close-item.cat-praise{border-left:3px solid var(--green)}
+.close-item.cat-question{border-left:3px solid var(--violet)}
+.close-item-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0;align-items:center}
+.cap-list-item{display:flex;align-items:flex-start;gap:6px}
+.cap-list-actions{display:flex;gap:4px;flex-shrink:0;align-items:flex-start;padding-top:1px}
+.cap-action-btn{border:none;background:transparent;cursor:pointer;font-size:11px;padding:2px 5px;border-radius:4px;line-height:1;transition:background .15s,color .15s}
+.cap-action-btn.edit{color:var(--blue)}
+.cap-action-btn.edit:hover{background:var(--blue-pale);color:var(--blue-deep)}
+.cap-action-btn.del{color:var(--coral)}
+.cap-action-btn.del:hover{background:#FFF1F2;color:#9F1239}
+.next-coffee{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(135deg,var(--blue-pale),var(--violet-pale));border:1.5px solid rgba(37,99,235,.25);border-radius:14px;padding:14px 22px}
+.next-coffee-main{font-size:clamp(15px,1.5vw,18px);font-weight:700;color:var(--ink);margin-bottom:3px}
+.next-coffee-sub{font-size:clamp(11px,1.1vw,13px);font-weight:600;color:var(--blue-deep)}
+.next-coffee-badge{flex-shrink:0;font-size:34px}
+.signoff{flex-shrink:0;text-align:center;font-size:clamp(13px,1.3vw,15px);font-weight:600;font-style:italic;color:var(--ink);padding:6px}
+
+/* ---------- BOTTOM BAR ---------- */
+#bottombar{position:fixed;bottom:0;left:0;right:0;height:56px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;gap:16px}
+.nav-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--ink);font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .15s}
+.nav-btn:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.nav-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.nav-btn.primary:hover{background:var(--blue-deep)}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed}
+.prog-wrap{flex:1;display:flex;align-items:center;gap:14px;max-width:600px}
+.prog-track{flex:1;height:4px;background:var(--border);border-radius:999px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--violet));border-radius:999px;transition:width .35s ease}
+.prog-meta{font-size:11.5px;font-weight:700;color:var(--ink-mid);white-space:nowrap}
+
+/* ---------- CAPTURE PANEL ---------- */
+#cap-overlay{position:fixed;inset:0;background:rgba(15,23,42,.4);z-index:200;display:none;backdrop-filter:blur(2px)}
+#cap-overlay.open{display:block}
+#cap-panel{position:fixed;top:0;right:0;bottom:0;width:min(420px,90vw);background:var(--surface);box-shadow:-8px 0 32px rgba(0,0,0,.18);z-index:201;transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;padding:24px}
+#cap-panel.open{transform:none}
+.cap-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.cap-panel-title{font-size:18px;font-weight:700;color:var(--ink)}
+.cap-close{background:var(--paper);border:none;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;color:var(--ink-mid);font-weight:700}
+.cap-panel-sub{font-size:12px;font-weight:500;color:var(--ink-soft);margin-bottom:16px;line-height:1.4}
+.cap-cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.cap-cat{padding:9px;border-radius:9px;border:2px solid;background:var(--surface);cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font);transition:all .12s}
+.cap-cat[data-cat=blocker]{border-color:var(--coral);color:var(--coral-deep)}
+.cap-cat[data-cat=improvement]{border-color:var(--blue);color:var(--blue-deep)}
+.cap-cat[data-cat=praise]{border-color:var(--green);color:var(--green-deep)}
+.cap-cat[data-cat=question]{border-color:var(--violet);color:var(--violet-deep)}
+.cap-cat.sel[data-cat=blocker]{background:var(--coral);color:#fff}
+.cap-cat.sel[data-cat=improvement]{background:var(--blue);color:#fff}
+.cap-cat.sel[data-cat=praise]{background:var(--green);color:#fff}
+.cap-cat.sel[data-cat=question]{background:var(--violet);color:#fff}
+#cap-input{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:11px 13px;font-size:13px;font-family:var(--font);resize:none;min-height:64px;margin-bottom:10px;color:var(--ink)}
+#cap-input:focus{outline:none;border-color:var(--blue)}
+.cap-save{width:100%;padding:11px;border-radius:9px;background:var(--blue);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);margin-bottom:16px}
+.cap-save:hover{background:var(--blue-deep)}
+.cap-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.cap-list-item{background:var(--paper);border-radius:9px;padding:11px 13px;border-left:3px solid var(--border)}
+.cap-list-item.blocker{border-left-color:var(--coral)}
+.cap-list-item.improvement{border-left-color:var(--blue)}
+.cap-list-item.praise{border-left-color:var(--green)}
+.cap-list-item.question{border-left-color:var(--violet)}
+.cap-list-cat{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--ink-mid);margin-bottom:3px;text-transform:uppercase}
+.cap-list-text{font-size:12.5px;font-weight:500;color:var(--ink);line-height:1.4}
+.cap-copy{margin-top:12px;padding:9px;border-radius:9px;background:var(--paper);border:1px solid var(--border);color:var(--ink);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font)}
+.cap-copy:hover{background:var(--border-soft)}
+
+/* ---------- MODAL ---------- */
+#modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:300;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+#modal-overlay.open{display:flex}
+#modal-box{background:var(--surface);border-radius:16px;padding:28px;max-width:480px;width:90vw;box-shadow:var(--shadow-lg)}
+#modal-title{font-size:19px;font-weight:700;color:var(--ink);margin-bottom:12px}
+#modal-body{font-size:14px;font-weight:500;color:var(--ink-soft);line-height:1.55}
+.modal-close{margin-top:20px;padding:9px 18px;border-radius:9px;background:var(--blue);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1100px){
+  .tabs{display:none}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .agenda-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:768px){
+  html,body{overflow:auto;height:auto}
+  main{position:static;height:auto;min-height:calc(100vh - 112px)}
+  .scene{height:auto;min-height:calc(100vh - 112px);overflow:visible}
+  .grid-3,.grid-4,.grid-2,.agenda-grid,.cover-attendees,.j-body,.loop-diagram{grid-template-columns:1fr}
+  .loop-diagram{display:flex;flex-direction:column}
+  .loop-col.outputs .loop-card,.loop-col.outputs .loop-card-name,.loop-col.outputs .loop-coltag{text-align:left}
+  .loop-col.outputs .loop-card-name{justify-content:flex-start}
+  .loop-arrows{transform:rotate(90deg)}
+  .map-row{grid-template-columns:1fr;gap:8px}
+  .map-line{display:none}
+  .flow-row{grid-template-columns:1fr;gap:6px}
+  .flow-line{display:none}
+  .j-tl-name{font-size:9px}
+  .pod-row{flex-direction:column}
+  .next-coffee{flex-direction:column;align-items:flex-start;text-align:left}
+}
+/* ===== VECTOR ICONS ===== */
+.ico{display:inline-block;width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;flex-shrink:0}
+.pod-icon{display:inline-flex;align-items:center}
+.pod-icon .ico{width:17px;height:17px;color:var(--blue)}
+.pod-card.lead-card .pod-icon .ico{color:var(--blue-deep)}
+.pod-card.system .pod-icon .ico{color:var(--violet)}
+.pod-card.lang .pod-icon .ico{color:var(--gold-deep)}
+.loop-card-name .ico{width:17px;height:17px}
+.loop-col.inputs .loop-card-name .ico{color:var(--blue)}
+.loop-col.outputs .loop-card-name .ico{color:var(--green-deep)}
+.close-head .ico{width:20px;height:20px}
+.close-card.captured .close-head .ico{color:var(--coral)}
+.close-card.commits .close-head .ico{color:var(--green-deep)}
+.next-coffee-badge .ico{width:32px;height:32px;color:var(--blue-deep)}
+.map-badge .ico,.flow-badge .ico{width:14px;height:14px}
+.j-snap-icon .ico{width:24px;height:24px;color:#fff}
+.j-snap-node-ic .ico{width:20px;height:20px}
+.j-tl-dot .ico{width:17px;height:17px}
+.j-glance-ic .ico{width:12px;height:12px;color:#fff}
+/* ===== DYNAMIC SEASONING ===== */
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.scene.active .grid-2>*,.scene.active .grid-3>*,.scene.active .grid-4>*,.scene.active .agenda-grid>*,.scene.active .pod-band{animation:rise .7s ease both}
+.scene.active .grid-2>*:nth-child(2),.scene.active .grid-3>*:nth-child(2),.scene.active .grid-4>*:nth-child(2),.scene.active .agenda-grid>*:nth-child(2),.scene.active .pod-band:nth-child(2){animation-delay:.13s}
+.scene.active .grid-2>*:nth-child(3),.scene.active .grid-3>*:nth-child(3),.scene.active .grid-4>*:nth-child(3),.scene.active .agenda-grid>*:nth-child(3),.scene.active .pod-band:nth-child(3){animation-delay:.26s}
+.scene.active .grid-2>*:nth-child(4),.scene.active .grid-4>*:nth-child(4),.scene.active .agenda-grid>*:nth-child(4){animation-delay:.39s}
+.scene.active .map-panel,.scene.active .flow-strip,.scene.active .muscle-headline,.scene.active .reflection,.scene.active .commit-footer,.scene.active .next-coffee,.scene.active .loop-hub,.scene.active .loop-card,.scene.active .signoff{animation:rise .75s ease both;animation-delay:.18s}
+@keyframes march{from{background-position:0 0}to{background-position:12px 0}}
+.map-line,.flow-line{animation:march 1.7s linear infinite}
+@keyframes arrowpulse{0%,100%{opacity:.5;transform:translateX(0)}50%{opacity:1;transform:translateX(4px)}}
+.loop-arrows{animation:arrowpulse 2.8s ease-in-out infinite}
+.j-snap-prog-fill{transition:width 1s cubic-bezier(.4,0,.2,1)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ===== COVER HEARTBEAT ===== */
+.cover-pulse{position:relative;margin:8px 0 0;flex-shrink:0;line-height:0}
+.cover-pulse svg{width:100%;height:auto;display:block}
+.ecg-line{stroke:rgba(37,99,235,.30);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:ecgdraw 2.8s ease .15s forwards}
+@keyframes ecgdraw{to{stroke-dashoffset:0}}
+.ecg-bead{fill:var(--blue);filter:drop-shadow(0 0 3px rgba(37,99,235,.7))}
+/* ===== TRAVELING BEADS on flowing dotted connectors ===== */
+.map-line,.flow-line{position:relative;overflow:visible}
+.map-line::after,.flow-line::after{content:'';position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;transform:translate(-50%,-50%);opacity:0;pointer-events:none;animation:beadflow 4.3s cubic-bezier(.45,0,.55,1) infinite}
+.map-line::after{background:var(--coral);box-shadow:0 0 7px 1px rgba(225,29,72,.5)}
+.flow-line::after{background:var(--gold);box-shadow:0 0 7px 1px rgba(217,119,6,.5)}
+@keyframes beadflow{0%{left:0;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:100%;opacity:0}}
+.map-row:nth-child(2) .map-line::after{animation-delay:1s}
+.map-row:nth-child(3) .map-line::after{animation-delay:2s}
+.flow-row:nth-child(2) .flow-line::after{animation-delay:.9s}
+.flow-row:nth-child(3) .flow-line::after{animation-delay:1.8s}
+/* ===== JOURNEY TIMELINE traveling bead ===== */
+
+@keyframes tlbead{0%{left:3%;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:97%;opacity:0}}
+/* ===== MUSCLE CONVERGING STREAMS ===== */
+.muscle-flow{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px 0}
+.mflow-svg{width:100%;height:100%;max-height:210px;display:block;text-rendering:geometricPrecision;shape-rendering:crispEdges}
+/* ===== LOOP SPOKES ===== */
+.loop-diagram{position:relative}
+.loop-col,.loop-hub-col{position:relative;z-index:1}
+.loop-spoke-svg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.loop-arrows{display:none}
+/* ===== POD inter-band flow connectors ===== */
+.pod-conn{height:13px;position:relative;flex-shrink:0;margin:-3px 0}
+.pod-conn::before{content:'';position:absolute;left:50%;top:0;width:2px;height:13px;transform:translateX(-50%);background:repeating-linear-gradient(180deg,var(--blue) 0 3px,transparent 3px 7px);opacity:.4}
+.pod-conn::after{content:'';position:absolute;left:50%;top:0;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);background:var(--blue);box-shadow:0 0 5px rgba(37,99,235,.5);animation:podbead 3s linear infinite}
+@keyframes podbead{0%{top:0;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:13px;opacity:0}}
+/* ===== ORG CHART (Structure scene) ===== */
+.org-wrap{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:2px 0}
+.org-svg{width:100%;height:100%;max-height:100%;display:block}
+.org-svg text{font-family:inherit}
+.org-node{cursor:pointer;transition:transform .15s ease}
+.org-node:hover{transform:translateY(-2px)}
+.org-node rect{transition:filter .15s ease}
+.org-node:hover rect{filter:url(#nshh)}
+
+/* --- ported pod tree (Option A) --- */
+.arch-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 22px;margin:10px 0 0;flex:1;min-height:0;display:flex;flex-direction:column}
+.arch-svg{width:100%;height:100%;flex:1;min-height:0;display:block;text-rendering:geometricPrecision;shape-rendering:crispEdges}
+.band-label{font-size:12.5px;letter-spacing:.14em;fill:var(--ink-mid);font-weight:700;font-family:'Avenir Next','Avenir','Manrope','Inter',sans-serif}
+.arch-node{cursor:default}
+@keyframes beadglow{0%,100%{opacity:1;r:3}50%{opacity:.6;r:2.2}}
+.arch-node-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 10px;height:100%;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:all .18s ease;box-sizing:border-box;overflow:hidden;word-break:break-word}
+.arch-node:hover .arch-node-box{border-color:var(--blue);box-shadow:0 6px 16px rgba(37,99,235,.18);transform:translateY(-1px)}
+.node-icon{margin-bottom:2px;line-height:1;color:var(--ink-mid)}
+.node-icon .ico{width:19px;height:19px}
+.node-title{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.2}
+.arch-node-box[style*="background:#1E3A8A"] .node-title,
+.arch-node-box[style*="background: #1E3A8A"] .node-title{color:#ffffff !important}
+.node-sub{font-size:10.5px;color:#334155;line-height:1.3;margin-top:2px;font-weight:600}
+.flow-path{fill:none;stroke-width:1.5;stroke-dasharray:5,4}
+.flow-path.blue{stroke:var(--blue);opacity:.35}
+.flow-path.violet{stroke:var(--violet);opacity:.35}
+.flow-path.gold{stroke:var(--gold);opacity:.4}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--ink-mid);padding-top:12px;border-top:1px dashed var(--border);flex-shrink:0}
+.legend-hint{margin-left:auto;opacity:.6;font-style:italic}
+@media (max-width:768px){.arch-wrapper{flex:none}.arch-svg{height:auto}}
+.pod-modernize{margin:8px 0 0;font-size:12px;line-height:1.4;color:var(--blue-deep);background:var(--blue-pale);border:1px solid var(--blue);border-radius:8px;padding:7px 12px;font-weight:500;flex-shrink:0}
+.pod-modernize strong{font-weight:700}
+*,*::before,*::after{box-sizing:border-box}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></symbol><symbol id="i-bar-chart-2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol><symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol><symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-message-square" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol><symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol><symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4" height="16" fill="currentColor" stroke="none"/></symbol></defs></svg>
+
+<!-- ===== TOP BAR ===== -->
+<div id="topbar">
+  <img class="brand-logo" src="data:image/jpeg;base64,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" alt="Prowesstics">
+  <div class="brand-divider"></div>
+  <span class="brand-text">RRTS &times; Prowesstics</span>
+  <div class="tabs" id="tabs"></div>
+  <div class="topbar-actions">
+    <button id="capture-btn" onclick="toggleCapture()"><span class="cap-dot"></span><span class="cap-label">Capture</span><span class="cap-count" id="cap-count">0</span></button>
+    <button id="play-btn" onclick="togglePlay()"><span id="play-icon"><svg class="ico"><use href="#i-play"/></svg></span> <span id="play-label">Play</span></button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- SCENE 1 OF 6: COVER -->
+<section class="scene" data-scene="0">
+  <div class="cover-top">
+    <div class="eyebrow">RRTS &times; Prowesstics &middot; Quality Engineering Pod</div>
+    <h1 class="cover-h1">Partnership Review <span class="accent">&middot; No. 02</span></h1>
+    <div class="cover-date">June 2026</div>
+    <p class="cover-strap">Where we stood. What we have heard. What we have moved.<br>Where we are heading next.</p>
+  </div>
+  <div class="cover-pulse" aria-hidden="true"><svg viewBox="0 0 1000 26"><path class="ecg-line" id="ecg-path" pathLength="1" fill="none" d="M0,13 L165,13 L171,13 L175,4 L181,22 L187,13 L200,13 L365,13 L371,13 L375,4 L381,22 L387,13 L400,13 L565,13 L571,13 L575,4 L581,22 L587,13 L600,13 L765,13 L771,13 L775,4 L781,22 L787,13 L800,13 L965,13 L971,13 L975,4 L981,22 L987,13 L1000,13"/><circle class="ecg-bead" r="2.6"><animateMotion dur="7.5s" repeatCount="indefinite" calcMode="linear"><mpath href="#ecg-path"/></animateMotion></circle></svg></div>
+  <div class="cover-agenda">
+    <div class="agenda-label">TONIGHT'S FLOW &middot; FOUR MOMENTS</div>
+    <div class="agenda-grid">
+      <div class="agenda-card" data-c="coral" onclick="go(1)">
+        <div class="agenda-num">01 &middot; HEARD &amp; OWN</div>
+        <div class="agenda-name">Heard and owned</div>
+        <div class="agenda-brief">Project planning and business language. Both structured and owned.</div>
+      </div>
+      <div class="agenda-card" data-c="gold" onclick="go(2)">
+        <div class="agenda-num">02 &middot; THE POD</div>
+        <div class="agenda-name">The pod at work</div>
+        <div class="agenda-brief">Four engineers, every module, modernised.</div>
+      </div>
+      <div class="agenda-card" data-c="blue" onclick="go(3)">
+        <div class="agenda-num">03 &middot; MUSCLE</div>
+        <div class="agenda-name">Progress and Engineering Impact</div>
+        <div class="agenda-brief">Rendering, pipelines and stack - measurable progress.</div>
+      </div>
+      <div class="agenda-card" data-c="green" onclick="go(4)">
+        <div class="agenda-num">04 &middot; JOURNEY</div>
+        <div class="agenda-name">Where we are heading</div>
+        <div class="agenda-brief">AI-ready architecture. Moving to an AI ecosystem in Q3.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-attendees">
+    <div class="att-card">
+      <div class="att-label">FROM PROWESSTICS</div>
+      <div class="att-names">Pandu &middot; Harish &middot; Herwin</div>
+    </div>
+    <div class="att-card">
+      <div class="att-label">FROM RRTS</div>
+      <div class="att-names">Andrew &middot; RRTS Leadership Team</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 2 OF 6: HEARD & OWN -->
+<section class="scene" data-scene="1">
+  <div class="eyebrow">Feedback received and owned</div>
+  <h2>What we heard, and own</h2>
+  <p class="lead">Two priorities from RRTS, both embedded into how we operate today. One ask in return, framed in the spirit of the partnership.</p>
+  <div class="content-area">
+    <div class="grid-2">
+      <div class="card quote-card">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="quote-text">Feedback received from RRTS: project planning was not streamlined. There was no clear governance, no targeted delivery timeline, and operations lacked structure.</div>
+        <div class="quote-src">PRIORITY ONE &middot; FROM RRTS</div>
+      </div>
+      <div class="card quote-card">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="quote-text">Feedback received from RRTS: the team needs to speak our business language - understand our domain, our operations, and how our business works.</div>
+        <div class="quote-src">PRIORITY TWO &middot; FROM RRTS</div>
+      </div>
+    </div>
+    <div class="map-panel">
+      <div class="map-head">
+        <span class="tag coral">HEARD FROM YOU</span>
+        <span class="map-arrow">&rarr;</span>
+        <span class="tag green">OWNED AND IN MOTION</span>
+      </div>
+      <div class="map-rows">
+        <div class="map-row">
+          <div class="map-input"><div class="map-input-name">Project planning</div><div class="map-input-quote">no structure, no governance</div></div>
+          <div class="map-line"></div>
+          <div class="map-status"><span class="map-badge live"><svg class="ico"><use href="#i-check"/></svg></span>Milestone-based governance live &mdash; targeted delivery timelines in place</div>
+        </div>
+        <div class="map-row">
+          <div class="map-input"><div class="map-input-name">Business language</div><div class="map-input-quote">speak our domain</div></div>
+          <div class="map-line"></div>
+          <div class="map-status"><span class="map-badge live"><svg class="ico"><use href="#i-check"/></svg></span>Live in the pod &mdash; domain context in standups and reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="reflection"><p>We now operate on a milestone module with a targeted delivery timeline. Both priorities from RRTS are embedded into how the pod works every day.</p></div>
+  </div>
+</section>
+
+<!-- SCENE 3 OF 6: THE POD -->
+<section class="scene" data-scene="2">
+  <div class="eyebrow">The system, end to end</div>
+  <h2>The pod at work</h2>
+  <div class="pod-modernize" style="background:var(--blue-deep);color:#fff;border:none;padding:10px 18px;border-radius:10px;font-size:clamp(12px,1.05vw,14px);font-weight:600;line-height:1.7;margin-bottom:10px">
+    <strong style="color:#FBBF24">Modernisation through the joint RRTS &times; Prowesstics effort</strong> &nbsp;&middot;&nbsp; Legacy 6,000-line stored procedure modernised and simplified into clean ETL &nbsp;&middot;&nbsp; SSAS retiring &nbsp;&middot;&nbsp; MS Power BI &amp; Microsoft Fabric both live now<br><span style="display:inline-block;padding-left:2em">&middot;&nbsp; Pipelines from 3 hours to 1 hr 20 min &nbsp;&middot;&nbsp; Rendering from 2 minutes to under 10 seconds</span>
+  </div>
+  <div class="arch-wrapper">
+    <svg class="arch-svg" viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="p-pe1" d="M530,152 C530,164 145,164 145,172"/>
+        <path id="p-pe2" d="M563,152 C563,164 435,164 435,172"/>
+        <path id="p-pe3" d="M637,152 C637,164 725,164 725,172"/>
+        <path id="p-pe4" d="M670,152 C670,164 1015,164 1015,172"/>
+        <path id="p-eh1" d="M145,224 C145,234 540,228 540,238"/>
+        <path id="p-eh2" d="M435,224 C435,233 580,229 580,238"/>
+        <path id="p-eh3" d="M725,224 C725,233 620,229 620,238"/>
+        <path id="p-eh4" d="M1015,224 C1015,234 660,228 660,238"/>
+        <path id="p-hs1" d="M340,270 C340,280 380,278 380,288"/>
+        <path id="p-hs2" d="M860,270 C860,280 820,278 820,288"/>
+        <path id="p-hx1" d="M480,322 C480,348 350,346 350,372"/>
+        <path id="p-hx2" d="M720,322 C720,348 850,346 850,372"/>
+        <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-violet" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <text x="20" y="22" class="band-label">1 · THE POD · 4 ENGINEERS + 1 PM</text>
+
+      <!-- Row 1: Prowesstics leadership y=30 -->
+      <g class="arch-node">
+        <foreignObject x="450" y="30" width="300" height="48">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="padding:8px 14px;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--paper)">
+            <div class="node-sub" style="font-size:11px;margin:0">Delivery governance</div>
+            <div class="node-title" style="font-size:12.5px">Prowesstics leadership</div>
+          </div>
+        </foreignObject>
+      </g>
+
+      <!-- Row 2: Pandu y=96 (gap +18 from row 1 bottom) -->
+      <g class="arch-node">
+        <foreignObject x="500" y="84" width="200" height="68">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="border-color:var(--blue);background:var(--blue-pale);align-items:center;text-align:center">
+            <div class="node-icon"><svg class="ico"><use href="#i-user"/></svg></div>
+            <div class="node-title" style="color:var(--blue-deep);font-size:12.5px">Pandu · PM</div>
+            <div class="node-sub">governs delivery rhythm</div>
+          </div>
+        </foreignObject>
+      </g>
+
+      <!-- Row 3: 4 Engineers y=172 (gap +18 from row 2 bottom) -->
+      <g class="arch-node">
+        <foreignObject x="40" y="172" width="210" height="52">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
+            <div class="node-icon"><svg class="ico"><use href="#i-server"/></svg></div>
+            <div class="node-title" style="font-size:12.5px">Data Engineer 1</div>
+          </div>
+        </foreignObject>
+      </g>
+      <g class="arch-node">
+        <foreignObject x="330" y="172" width="210" height="52">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
+            <div class="node-icon"><svg class="ico"><use href="#i-git-branch"/></svg></div>
+            <div class="node-title" style="font-size:12.5px">Data Engineer 2</div>
+          </div>
+        </foreignObject>
+      </g>
+      <g class="arch-node">
+        <foreignObject x="620" y="172" width="210" height="52">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
+            <div class="node-icon"><svg class="ico"><use href="#i-bar-chart-2"/></svg></div>
+            <div class="node-title" style="font-size:12.5px">Power BI Engineer 1</div>
+          </div>
+        </foreignObject>
+      </g>
+      <g class="arch-node">
+        <foreignObject x="910" y="172" width="210" height="52">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box">
+            <div class="node-icon"><svg class="ico"><use href="#i-trending-up"/></svg></div>
+            <div class="node-title" style="font-size:12.5px">Power BI Engineer 2</div>
+          </div>
+        </foreignObject>
+      </g>
+
+      <!-- Row 4: Unified shared capabilities block -->
+      <g>
+        <foreignObject x="40" y="238" width="1120" height="32">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;height:100%;background:#F1F5F9;border:1px solid #CBD5E1;border-radius:8px;box-sizing:border-box;overflow:hidden">
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">ETL &middot; Pipelines</div>
+            <div style="width:1px;height:60%;background:#CBD5E1;flex-shrink:0"></div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">Stored-proc modernisation</div>
+            <div style="width:1px;height:60%;background:#CBD5E1;flex-shrink:0"></div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">Modelling &middot; Fabric</div>
+            <div style="width:1px;height:60%;background:#CBD5E1;flex-shrink:0"></div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:10.5px;font-weight:600;color:#475569;height:100%">Reporting &middot; Rendering</div>
+          </div>
+        </foreignObject>
+      </g>
+
+      <!-- Row 5: Hub y=288 (gap +18 from row 4 bottom) -->
+      <g class="arch-node">
+        <foreignObject x="380" y="288" width="440" height="34">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="background:#1E3A8A;border:none;align-items:center;justify-content:center;text-align:center">
+            <div class="node-title" style="color:#ffffff !important;font-weight:700;font-size:12.5px">All four engineers &middot; every module</div>
+          </div>
+        </foreignObject>
+      </g>
+
+      <!-- Band label row 6 -->
+      <text x="20" y="360" class="band-label">2 · RRTS SYSTEMS WE TOUCH</text>
+
+      <!-- Row 6: Systems y=372 (gap +18) -->
+      <g class="arch-node">
+        <foreignObject x="200" y="372" width="300" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="border-color:var(--blue)">
+            <div class="node-icon"><svg class="ico"><use href="#i-bar-chart-2"/></svg></div>
+            <div class="node-title" style="font-size:12.5px">SAFX Reports</div>
+          </div>
+        </foreignObject>
+      </g>
+      <g class="arch-node">
+        <foreignObject x="700" y="372" width="300" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="arch-node-box" style="border-color:var(--teal);padding:8px 10px">
+            <div class="node-icon"><svg class="ico"><use href="#i-layers"/></svg></div>
+            <div class="node-title" style="font-size:12.5px">Line Haul Model</div>
+            <div class="node-sub" style="color:var(--teal);font-weight:700;font-size:10.5px;margin-top:4px">Nearing commencement</div>
+          </div>
+        </foreignObject>
+      </g>
+
+      <use href="#p-pe1" class="flow-path blue"/>
+      <use href="#p-pe2" class="flow-path blue"/>
+      <use href="#p-pe3" class="flow-path blue"/>
+      <use href="#p-pe4" class="flow-path blue"/>
+      <use href="#p-eh1" class="flow-path blue"/>
+      <use href="#p-eh2" class="flow-path blue"/>
+      <use href="#p-eh3" class="flow-path blue"/>
+      <use href="#p-eh4" class="flow-path blue"/>
+      <use href="#p-hs1" class="flow-path violet"/>
+      <use href="#p-hs2" class="flow-path violet"/>
+      <use href="#p-hx1" class="flow-path violet"/>
+      <use href="#p-hx2" class="flow-path violet"/>
+
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="0s"><mpath href="#p-pe1"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="2.5s"><mpath href="#p-pe2"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="5s"><mpath href="#p-pe3"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="10s" repeatCount="indefinite" begin="7.5s"><mpath href="#p-pe4"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="0s"><mpath href="#p-eh1"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="2.2s"><mpath href="#p-eh2"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="4.5s"><mpath href="#p-eh3"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-blue)" fill="#2563EB"><animateMotion dur="9s" repeatCount="indefinite" begin="6.7s"><mpath href="#p-eh4"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="8s" repeatCount="indefinite" begin="0s"><mpath href="#p-hs1"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="8s" repeatCount="indefinite" begin="1.3s"><mpath href="#p-hs2"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="7s" repeatCount="indefinite" begin="0s"><mpath href="#p-hx1"/></animateMotion></circle>
+      <circle r="3.5" filter="url(#glow-violet)" fill="#7C3AED"><animateMotion dur="7s" repeatCount="indefinite" begin="1s"><mpath href="#p-hx2"/></animateMotion></circle>
+    </svg>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Daily delivery flow</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--violet)"></span>Engineering pooled across modules</div>
+      <div class="legend-hint">Every box is clickable</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 4 OF 6: MUSCLE -->
+<section class="scene" data-scene="3">
+  <div class="eyebrow">Progress and Engineering Impact</div>
+  <h2>Progress and Engineering Impact</h2>
+  <p class="lead">A practical view of the delivery gains and the active modernisation path - through the joint RRTS &times; Prowesstics effort.</p>
+  <div class="content-area">
+    <div class="grid-4">
+      <div class="card metric-card" data-c="blue">
+        <div class="metric-label">POWER BI RENDERING</div>
+        <div class="metric-value"><span class="strike">2 min</span><span class="arr">&rarr;</span>&lt;10s</div>
+        <div class="metric-sub">Through the joint RRTS &times; Prowesstics effort, executive reporting now renders in under 10 seconds. MS Power BI is live.</div>
+      </div>
+      <div class="card metric-card" data-c="violet">
+        <div class="metric-label">FULL LOAD PROCESSING TIME</div>
+        <div class="metric-value"><span class="strike">3 hrs</span><span class="arr">&rarr;</span>1 hr 20 min</div>
+        <div class="metric-sub">End-to-end pipeline runs reduced from 3 hours to 1 hour 20 minutes. <strong style="color:#D97706;font-weight:700">Sales model target: 30 minutes.</strong> Legacy stored procedures actively being removed in the process.</div>
+      </div>
+      <div class="card metric-card" data-c="teal">
+        <div class="metric-label">STACK MODERNISATION</div>
+        <div class="metric-value">SSAS <span class="arr">&rarr;</span> Fabric</div>
+        <div class="metric-sub">SSAS is actively retiring. MS Power BI and Microsoft Fabric are both live now - not in the plan, not in the queue. Pipeline modernisation owned by the pod.</div>
+      </div>
+      <div class="card metric-card" data-c="green">
+        <div class="metric-label">FUTURE AI-READY FRAMEWORK</div>
+        <div class="metric-value">Future<span class="small"> AI-ready</span></div>
+        <div class="metric-sub">Every framework and data engineering structure we build is adaptable. Built to move into an AI ecosystem as RRTS modernisation evolves.</div>
+      </div>
+    </div>
+    <div class="muscle-flow"><svg viewBox="0 0 1000 184" class="mflow-svg" aria-hidden="true"><rect x="260" y="6" width="200" height="26" rx="13" fill="#DBEAFE"/><text x="360" y="23" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A" font-family="inherit">4 delivery milestones</text><path id="mfpill" d="M462,19 H542" fill="none" stroke="#1E3A8A" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#mfarrow)"/><circle r="3.5" fill="#1E3A8A"><animateMotion dur="1.4s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfpill"/></animateMotion></circle><rect x="544" y="6" width="232" height="26" rx="13" fill="#DCFCE7"/><text x="660" y="23" text-anchor="middle" font-size="12.5" font-weight="700" fill="#15803D" font-family="inherit">pointed at your two priorities</text><text x="24" y="42" font-size="13" font-weight="700" fill="#0F172A" font-family="inherit">Rendering &lt;10s</text><path id="mfp0" d="M168,38 C 360,38 380,108 506,108" fill="none" stroke="#2563EB" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.55"/><circle r="3.5" fill="#2563EB"><animateMotion dur="5.5s" begin="0.0s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfp0"/></animateMotion></circle><text x="24" y="78" font-size="13" font-weight="700" fill="#0F172A" font-family="inherit">Pipelines 1 hr 20 min</text><path id="mfp1" d="M168,74 C 360,74 380,108 506,108" fill="none" stroke="#7C3AED" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.55"/><circle r="3.5" fill="#7C3AED"><animateMotion dur="5.5s" begin="0.5s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfp1"/></animateMotion></circle><text x="24" y="114" font-size="13" font-weight="700" fill="#0F172A" font-family="inherit">SSAS retiring &bull; Fabric live</text><path id="mfp2" d="M168,110 C 360,110 380,108 506,108" fill="none" stroke="#0D9488" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.55"/><circle r="3.5" fill="#0D9488"><animateMotion dur="5.5s" begin="1.0s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfp2"/></animateMotion></circle><text x="24" y="150" font-size="13" font-weight="700" fill="#0F172A" font-family="inherit">Future AI-ready</text><path id="mfp3" d="M168,146 C 360,146 380,108 506,108" fill="none" stroke="#16A34A" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.55"/><circle r="3.5" fill="#16A34A"><animateMotion dur="5.5s" begin="1.5s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfp3"/></animateMotion></circle><circle cx="548" cy="108" r="40" fill="#1E3A8A"/><text x="548" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF" font-family="inherit">Pod</text><text x="548" y="119" text-anchor="middle" font-size="11.5" font-weight="500" fill="#DBEAFE" font-family="inherit">proven</text><path id="mfout" d="M590,108 H806" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#mfarrow)"/><circle r="3" style="filter:drop-shadow(0 0 3px #16A34A)" fill="#16A34A"><animateMotion dur="4s" repeatCount="indefinite" calcMode="linear"><mpath href="#mfout"/></animateMotion></circle><circle cx="846" cy="108" r="22" fill="none" stroke="#16A34A" stroke-width="2"/><circle cx="846" cy="108" r="13" fill="none" stroke="#16A34A" stroke-width="2"/><circle cx="846" cy="108" r="4" fill="#E11D48"/><text x="846" y="156" text-anchor="middle" font-size="13" font-weight="700" fill="#0F172A" font-family="inherit">Planning &amp; language</text><defs><marker id="mfarrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs></svg></div>
+    <div class="muscle-headline">
+      <div class="muscle-headline-text">The capability is real. The framework is AI-ready. Planning and business language are the direction we are moving.</div>
+      <div class="muscle-headline-sub">Rendering and pipelines improved through the joint RRTS &times; Prowesstics effort. Legacy stored procedures actively being removed, SSAS retiring, MS Power BI and Microsoft Fabric both live now.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 5 OF 6: JOURNEY -->
+<section class="scene" data-scene="4">
+  <div class="eyebrow">January to year-end &middot; The honest timeline</div>
+  <h2>Where we are in the journey</h2>
+  <p class="lead">Six stages. You are looking at stage 4. Click any stage to see where it sits.</p>
+  <div class="j-tabs" id="j-tabs"></div>
+  <div class="j-body" id="j-body"></div>
+  <div class="j-timeline">
+    <div class="j-tl-label">JOURNEY HEARTBEAT &middot; JAN TO YEAR-END</div>
+    <div class="j-tl-track" id="j-tl-track"></div>
+  </div>
+</section>
+
+<!-- SCENE 6 OF 6: CLOSE -->
+<section class="scene" data-scene="5">
+  <div class="eyebrow">Closing</div>
+  <h2>Where this leaves us</h2>
+  <p class="lead">Two streams converging into next month's review: your feedback from today, and the path we are heading on.</p>
+  <div class="content-area">
+    <div class="grid-2" style="flex:1;min-height:0">
+      <div class="card close-card captured">
+        <div class="close-head"><span><svg class="ico"><use href="#i-inbox"/></svg></span>Captured today from Andrew</div>
+        <div class="close-list" id="close-captures">
+          <div class="close-empty">Captures from today's session appear here as you log them. Use the Capture button, top right.</div>
+        </div>
+      </div>
+      <div class="card close-card commits">
+        <div class="close-head"><span><svg class="ico"><use href="#i-trending-up"/></svg></span>Where we are heading</div>
+        <div class="close-list">
+          <div class="close-item cat-improvement"><div class="close-item-cat">01 &middot; PROJECT PLANNING</div><div class="close-item-text">Milestone-based governance in place. Targeted delivery timelines operating now.</div></div>
+          <div class="close-item cat-improvement"><div class="close-item-cat">02 &middot; BUSINESS LANGUAGE</div><div class="close-item-text">Domain fluency sustained across standups, reviews, and tickets.</div></div>
+          <div class="close-item cat-improvement"><div class="close-item-cat">03 &middot; FULL LOAD PROCESSING TIME</div><div class="close-item-text">Pipelines at 1 hr 20 min &mdash; <strong style="color:#D97706;font-weight:700">sales model target: 30 minutes.</strong></div></div>
+          <div class="close-item cat-improvement"><div class="close-item-cat">04 &middot; FUTURE AI-READINESS</div><div class="close-item-text">Frameworks adaptable. Moving operations toward an AI ecosystem in Q3.</div></div>
+          <div class="close-item cat-question"><div class="close-item-cat">A KIND CONSIDERATION</div><div class="close-item-text">To maintain planned delivery timelines, we recommend jointly prioritising ad hoc requests against the agreed modernisation roadmap during each review.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="next-coffee">
+      <div>
+        <div class="next-coffee-main">Next review: late July 2026 &middot; No. 03</div>
+        <div class="next-coffee-sub">Project planning on track. Business language deepening. Modernisation roadmap from your side. Andrew's running list sets the agenda.</div>
+      </div>
+      <span class="next-coffee-badge"><svg class="ico"><use href="#i-calendar"/></svg></span>
+    </div>
+    <div class="signoff">Thank you, Andrew. Thank you, RRTS team. Same time, next month.</div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== BOTTOM BAR ===== -->
+<div id="bottombar">
+  <button class="nav-btn" id="prev-btn" onclick="prev()">&larr; Previous</button>
+  <div class="prog-wrap">
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <span class="prog-meta" id="prog-meta">Scene 1 of 6</span>
+  </div>
+  <button class="nav-btn primary" id="next-btn" onclick="next()">Next &rarr;</button>
+</div>
+
+<!-- ===== CAPTURE PANEL ===== -->
+<div id="cap-overlay" onclick="toggleCapture()"></div>
+<div id="cap-panel">
+  <div class="cap-panel-head">
+    <div class="cap-panel-title">Capture Andrew</div>
+    <button class="cap-close" onclick="toggleCapture()">&times;</button>
+  </div>
+  <div class="cap-panel-sub">Log what Andrew raises in real time. It flows straight to the closing slide and the July agenda.</div>
+  <div class="cap-cats">
+    <button class="cap-cat" data-cat="blocker" onclick="selCat('blocker')">Blocker</button>
+    <button class="cap-cat" data-cat="improvement" onclick="selCat('improvement')">Improvement</button>
+    <button class="cap-cat" data-cat="praise" onclick="selCat('praise')">Praise</button>
+    <button class="cap-cat" data-cat="question" onclick="selCat('question')">Question</button>
+  </div>
+  <textarea id="cap-input" placeholder="Type what Andrew said, one line..."></textarea>
+  <button class="cap-save" onclick="saveCapture()">Save capture</button>
+  <div class="cap-list" id="cap-list"></div>
+  <button class="cap-copy" onclick="copyCaptures()">Copy all for follow-up</button>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div id="modal-box" onclick="event.stopPropagation()">
+    <div id="modal-title"></div>
+    <div id="modal-body"></div>
+    <button class="modal-close" onclick="closeModal()">Got it</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+var SCENES = ['Cover','Heard & own','The pod','Muscle','Journey','Close'];
+var current = 0;
+var captures = [];
+var selectedCat = 'improvement';
+var playing = false;
+var playTimer = null;
+
+// ============================================================
+// JOURNEY DATA
+// ============================================================
+var STAGES = [
+  {n:'Onboarding',date:'Jan',icon:'rocket',color:'#2563EB',status:'',label:'STAGE 1 \u00B7 LANDING',title:'January, the pod lands at RRTS',
+   body:'Simi led the initial onboarding. Four engineers picked up the codebase. SAFX reporting was the underlying complexity. The prior setup had stepped back. We took the keys and began the audit.',
+   nodes:[{l:'Pod onboarded',c:'blue'},{l:'Codebase audited',c:'muted'},{l:'Simi leads initial phase',c:'coral'}]},
+  {n:'First builds',date:'Feb-Apr',icon:'tool',color:'#2563EB',status:'',label:'STAGE 2 \u00B7 BUILDING',title:'February to April, the heavy lifts',
+   body:'Through the joint RRTS \u00d7 Prowesstics effort, the legacy 6,000-line stored procedure was modernised and simplified into clean ETL. SAFX reporting modernised on MS Power BI, rendering down from 2 minutes to under 10 seconds. Pandu joins and takes over delivery governance. The Sales Model received structural clean-up.',
+   nodes:[{l:'Legacy procs modernised',c:'green'},{l:'SAFX modernised',c:'blue'},{l:'Pandu takes over as PM',c:'blue'}]},
+  {n:'May feedback',date:'May',icon:'headphones',color:'#D97706',status:'',label:'STAGE 3 \u00B7 LISTENING',title:'You named the two priorities',
+   body:'Feedback received from RRTS: project planning was not streamlined, operations lacked structure and governance. The team also needed to speak more business language and understand the domain. We embedded both as priority actions.',
+   nodes:[{l:'Project planning priority set',c:'gold'},{l:'Business language priority set',c:'gold'},{l:'Milestone governance initiated',c:'gold'}]},
+  {n:'June',date:'Jun \u00B7 now',icon:'refresh',color:'#E11D48',status:'YOU ARE HERE',label:'STAGE 4 \u00B7 ADAPTING',title:'Where we are right now',current:true,
+   body:'Pipelines reduced from 3 hours to 1 hour 20 minutes. Sales model target: 30 minutes. SSAS is actively retiring. MS Power BI and Microsoft Fabric are both live now. Milestone-based governance is in place with targeted delivery timelines. Domain context absorbed across the pod.',
+   glance:[{t:'Pipelines 3 hrs to 1 hr 20 min \u2014 sales model target 30 min',s:'active'},{t:'SSAS actively retiring',s:'active'},{t:'MS Power BI \u0026 Microsoft Fabric both live',s:'done'},{t:'Milestone governance \u0026 delivery timelines in place',s:'done'},{t:'Business language live in standups \u0026 reviews',s:'done'}],
+   nodes:[{l:'Planning structured',c:'green'},{l:'Fabric live now',c:'blue'},{l:'Language live',c:'gold'}]},
+  {n:'July',date:'Jul',icon:'trending-up',color:'#16A34A',status:'',label:'STAGE 5 \u00B7 COMPOUNDING',title:'What we will bring next month',
+   body:'Sales model pipeline runs pushing toward 30 minutes. Fabric optimisation in active progress. Business language deeper across reviews, standups and tickets. Milestone governance rhythm strengthened. Legacy stored procedures actively being removed.',
+   nodes:[{l:'Begin Implementation of Line Haul Model',c:'green'},{l:'Fabric optimisation',c:'green'},{l:'Language deepening',c:'blue'}]},
+  {n:'Q3+ maturity',date:'Q3+',icon:'trophy',color:'#0D9488',status:'',label:'STAGE 6 \u00B7 MATURITY',title:'AI readiness and adaptable architecture',
+   body:'Moving toward an adaptable architecture with AI readiness at the core. The complete operations ecosystem is being oriented toward AI. Whatever advancements RRTS brings in, the pod is structured and ready to absorb them. Monthly reviews shift from corrections to opportunities.',
+   nodes:[{l:'Adaptable AI-ready architecture',c:'teal'},{l:'Full AI ecosystem readiness',c:'teal'},{l:'Reviews on RRTS AI priorities',c:'teal'}]}
+];
+var jCurrent = 3;
+var COLORMAP = {blue:'#2563EB',violet:'#7C3AED',gold:'#D97706',coral:'#E11D48',green:'#16A34A',teal:'#0D9488',muted:'#64748B'};
+var PALMAP = {blue:'#DBEAFE',violet:'#EDE9FE',gold:'#FEF3C7',coral:'#FEE2E2',green:'#DCFCE7',teal:'#CCFBF1',muted:'#F1F5F9'};
+var STATUSICON = {coral:'alert-triangle',gold:'target',green:'check-circle',teal:'trophy',blue:'refresh',muted:'circle'};
+
+// ============================================================
+// BUILD TABS
+// ============================================================
+
+function drawLoopSpokes(){
+  var dia=document.querySelector('.scene[data-scene="5"] .loop-diagram');
+  if(!dia)return;
+  var cr=dia.getBoundingClientRect();
+  if(cr.width<50||cr.height<50)return;
+  var hub=dia.querySelector('.loop-hub'); if(!hub)return;
+  var hr=hub.getBoundingClientRect();
+  var W=Math.round(cr.width), H=Math.round(cr.height);
+  var hubL={x:hr.left-cr.left,y:hr.top-cr.top+hr.height/2};
+  var hubR={x:hr.right-cr.left,y:hr.top-cr.top+hr.height/2};
+  var idx=0, p='';
+  function curve(s,e,color){
+    var mx=(s.x+e.x)/2;
+    var id='lsp'+(idx++);
+    var d='M'+s.x.toFixed(1)+','+s.y.toFixed(1)+' C'+mx.toFixed(1)+','+s.y.toFixed(1)+' '+mx.toFixed(1)+','+e.y.toFixed(1)+' '+e.x.toFixed(1)+','+e.y.toFixed(1);
+    p+='<path id="'+id+'" d="'+d+'" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-dasharray="5 6" opacity="0.45"/>';
+    p+='<circle r="3.2" fill="'+color+'"><animateMotion dur="4.4s" begin="'+(idx*0.4)+'s" repeatCount="indefinite" calcMode="linear"><mpath href="#'+id+'"/></animateMotion></circle>';
+  }
+  dia.querySelectorAll('.loop-col.inputs .loop-card').forEach(function(card){
+    var r=card.getBoundingClientRect();
+    curve({x:r.right-cr.left,y:r.top-cr.top+r.height/2}, hubL, '#2563EB');
+  });
+  dia.querySelectorAll('.loop-col.outputs .loop-card').forEach(function(card){
+    var r=card.getBoundingClientRect();
+    curve(hubR, {x:r.left-cr.left,y:r.top-cr.top+r.height/2}, '#16A34A');
+  });
+  var svg=dia.querySelector('#loop-spoke-svg');
+  if(!svg){
+    svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('id','loop-spoke-svg');
+    svg.setAttribute('class','loop-spoke-svg');
+    dia.insertBefore(svg,dia.firstChild);
+  }
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.innerHTML=p;
+}
+var _lsT;
+window.addEventListener('resize',function(){ if(current===5){ clearTimeout(_lsT); _lsT=setTimeout(drawLoopSpokes,150); } });
+
+function buildTabs(){
+  var t = document.getElementById('tabs');
+  t.innerHTML = SCENES.map(function(s,i){
+    return '<button class="tab" data-i="'+i+'" onclick="go('+i+')"><span class="tab-num">'+(i+1)+'</span>'+s+'</button>';
+  }).join('');
+}
+
+// ============================================================
+// SCENE NAVIGATION
+// ============================================================
+function render(){
+  var scenes = document.querySelectorAll('.scene');
+  scenes.forEach(function(sc,i){ sc.classList.toggle('active', i===current); });
+  document.querySelectorAll('.tab').forEach(function(tb,i){ tb.classList.toggle('active', i===current); });
+  document.getElementById('prog-fill').style.width = ((current+1)/SCENES.length*100)+'%';
+  document.getElementById('prog-meta').textContent = 'Scene '+(current+1)+' of '+SCENES.length;
+  document.getElementById('prev-btn').disabled = (current===0);
+  document.getElementById('next-btn').disabled = (current===SCENES.length-1);
+  if(current===5){ renderCloseCaptures(); }
+  if(current===4){ renderJourney(jCurrent); }
+  if(current===3){ countUp(); }
+}
+function go(i){ if(i<0||i>=SCENES.length) return; current=i; render(); }
+function next(){ if(current<SCENES.length-1){ current++; render(); } }
+function prev(){ if(current>0){ current--; render(); } }
+
+// ============================================================
+// JOURNEY RENDER
+// ============================================================
+function countUp(){
+  var sc=document.querySelector('.scene[data-scene="3"]');
+  if(!sc)return;
+  sc.querySelectorAll('.num').forEach(function(el){
+    var to=parseInt(el.getAttribute('data-to'),10)||0,start=null,dur=1400;
+    el.textContent='0';
+    function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);el.textContent=Math.round(p*to);if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  });
+}
+
+function buildJourneyTabs(){
+  var t = document.getElementById('j-tabs');
+  t.innerHTML = STAGES.map(function(s,i){
+    return '<button class="j-tab" data-i="'+i+'" onclick="renderJourney('+i+')">'+(i+1)+' \u00B7 '+s.n+'</button>';
+  }).join('');
+  var tr = document.getElementById('j-tl-track');
+  tr.innerHTML = '<svg class="tl-ecg" viewBox="0 0 1200 28" aria-hidden="true"><path class="tl-ecg-line" id="tl-ecg-path" pathLength="1" fill="none" d="M0,14 L192,14 L197,4 L203,24 L208,14 L392,14 L397,4 L403,24 L408,14 L592,14 L597,4 L603,24 L608,14 L792,14 L797,4 L803,24 L808,14 L992,14 L997,4 L1003,24 L1008,14 L1200,14"/><circle class="tl-ecg-bead" r="3"><animateMotion dur="7s" repeatCount="indefinite" calcMode="linear"><mpath href="#tl-ecg-path"/></animateMotion></circle></svg>' + STAGES.map(function(s,i){
+    var cur = s.current ? ' cur' : '';
+    var here = s.current ? '<div class="j-tl-here">YOU ARE HERE</div>' : '';
+    return '<div class="j-tl-stage'+cur+'" onclick="renderJourney('+i+')">'+here+
+      '<div class="j-tl-dot" style="'+(s.current?'':'border-color:'+s.color)+'"><svg class="ico" style="color:'+s.color+'"><use href="#i-'+s.icon+'"/></svg></div>'+
+      '<div class="j-tl-name">'+s.date+'</div></div>';
+  }).join('');
+}
+function renderJourney(idx){
+  jCurrent = idx;
+  var s = STAGES[idx];
+  var progress = Math.round((idx+1)/6*100);
+  // tabs
+  document.querySelectorAll('.j-tab').forEach(function(t,i){ t.classList.toggle('active', i===idx); });
+  // nodes
+  var nodesHtml = s.nodes.map(function(n){
+    var color = COLORMAP[n.c]||COLORMAP.blue;
+    var pal = PALMAP[n.c]||PALMAP.blue;
+    var icon = STATUSICON[n.c]||'refresh';
+    return '<div class="j-snap-node" style="background:'+pal+';border-left-color:'+color+';">'+
+      '<span class="j-snap-node-ic" style="color:'+color+';"><svg class="ico"><use href="#i-'+icon+'"/></svg></span>'+
+      '<span class="j-snap-node-label">'+n.l+'</span></div>';
+  }).join('');
+  // glance (only if current)
+  var glanceHtml = '';
+  if(s.glance){
+    glanceHtml = '<div class="j-glance"><div class="j-glance-label">THIS MONTH AT A GLANCE</div>'+
+      s.glance.map(function(g){
+        return '<div class="j-glance-item '+g.s+'"><span class="j-glance-ic"><svg class="ico"><use href="#i-'+(g.s==='done'?'check':'refresh')+'"/></svg></span>'+g.t+'</div>';
+      }).join('')+'</div>';
+  }
+  var hereLabel = s.current ? '<span class="j-here">YOU ARE HERE</span>' : '';
+  var herePill = s.current ? '<div class="j-snap-pill">YOU ARE HERE</div>' : '';
+  var body = '<div class="j-narrative">'+
+      '<div class="j-label">'+s.label+' '+hereLabel+'</div>'+
+      '<div class="j-title">'+s.title+'</div>'+
+      '<div class="j-text">'+s.body+'</div>'+
+      glanceHtml+
+    '</div>'+
+    '<div class="j-snap">'+
+      '<div class="j-snap-head">'+
+        '<div><div class="j-snap-stagenum">'+s.label+'</div>'+
+        '<div class="j-snap-iconrow"><span class="j-snap-icon" style="background:'+s.color+';"><svg class="ico"><use href="#i-'+s.icon+'"/></svg></span><span class="j-snap-of">of 6</span></div></div>'+
+        herePill+
+      '</div>'+
+      '<div class="j-snap-nodes">'+nodesHtml+'</div>'+
+      '<div class="j-snap-prog">'+
+        '<div class="j-snap-prog-meta"><span class="j-snap-prog-label">JOURNEY PROGRESS</span><span class="j-snap-prog-pct" style="color:'+s.color+';">'+progress+'%</span></div>'+
+        '<div class="j-snap-prog-bar"><div class="j-snap-prog-fill" data-w="'+progress+'" style="width:0;background:linear-gradient(90deg,#2563EB,'+s.color+');"></div></div>'+
+      '</div>'+
+    '</div>';
+  document.getElementById('j-body').innerHTML = body;
+  requestAnimationFrame(function(){var f=document.querySelector('.j-snap-prog-fill');if(f)f.style.width=f.dataset.w+'%';});
+}
+
+// ============================================================
+// CAPTURE PANEL
+// ============================================================
+function toggleCapture(){
+  document.getElementById('cap-overlay').classList.toggle('open');
+  document.getElementById('cap-panel').classList.toggle('open');
+}
+function openCapModal(){
+  document.getElementById('cap-overlay').classList.add('open');
+  document.getElementById('cap-panel').classList.add('open');
+}
+function selCat(c){
+  selectedCat = c;
+  document.querySelectorAll('.cap-cat').forEach(function(b){ b.classList.toggle('sel', b.dataset.cat===c); });
+}
+function saveCapture(){
+  var input = document.getElementById('cap-input');
+  var text = input.value.trim();
+  if(!text) return;
+  captures.push({cat:selectedCat, text:text});
+  input.value='';
+  renderCapList();
+  document.getElementById('cap-count').textContent = captures.length;
+}
+function deleteCapture(i){
+  captures.splice(i,1);
+  renderCapList();
+  document.getElementById('cap-count').textContent = captures.length;
+  if(document.querySelector('.scene[data-scene="5"]').style.display!=='none') renderCloseCaptures();
+}
+function editCapture(i){
+  var c = captures[i];
+  var input = document.getElementById('cap-input');
+  input.value = c.text;
+  // set the category button
+  selectedCat = c.cat;
+  document.querySelectorAll('.cap-cat-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.cat===c.cat); });
+  // remove the item so saving replaces it (insert at same position)
+  captures.splice(i,1);
+  renderCapList();
+  document.getElementById('cap-count').textContent = captures.length;
+  input.focus();
+}
+function renderCapList(){
+  var list = document.getElementById('cap-list');
+  if(captures.length===0){ list.innerHTML=''; return; }
+  list.innerHTML = captures.map(function(c,i){
+    return '<div class="cap-list-item '+c.cat+'">'
+      +'<div class="cap-list-cat">'+c.cat+'</div>'
+      +'<div class="cap-list-text">'+esc(c.text)+'</div>'
+      +'<div class="cap-list-actions">'
+      +'<button class="cap-action-btn edit" onclick="editCapture('+i+')" title="Edit">✏</button>'
+      +'<button class="cap-action-btn del" onclick="deleteCapture('+i+')" title="Delete">✕</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+function renderCloseCaptures(){
+  var el = document.getElementById('close-captures');
+  if(!el) return;
+  if(captures.length===0){
+    el.innerHTML = '<div class="close-empty">Captures from today\'s session appear here as you log them. Use the Capture button, top right.</div>';
+    return;
+  }
+  el.innerHTML = captures.map(function(c,i){
+    return '<div class="close-item cat-'+c.cat+'">'
+      +'<div class="close-item-cat">'+c.cat.toUpperCase()+'</div>'
+      +'<div class="close-item-text">'+esc(c.text)+'</div>'
+      +'<div class="close-item-actions">'
+      +'<button class="cap-action-btn edit" onclick="editCapture('+i+'); openCapModal();" title="Edit">✏</button>'
+      +'<button class="cap-action-btn del" onclick="deleteCapture('+i+')" title="Delete">✕</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+function copyCaptures(){
+  if(captures.length===0) return;
+  var txt = captures.map(function(c){ return '['+c.cat.toUpperCase()+'] '+c.text; }).join('\n');
+  navigator.clipboard.writeText(txt).then(function(){
+    var btn = document.querySelector('.cap-copy');
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(function(){ btn.textContent = orig; }, 1500);
+  });
+}
+function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// ============================================================
+// MODAL
+// ============================================================
+function modal(title, body){
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').textContent = body;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+var POD_MODAL = {
+  pandu:{title:"Pandu · PM",body:"Project Manager governing the pod. Single point of contact for delivery rhythm, delivery planning, and escalation. Reports directly to Herwin (CEO). Andrew has a direct line."},
+  reporting:{title:"Reporting structure",body:"Pandu reports directly to Herwin. Harish is a facilitator and communication channel for commercial and financial alignment when needed, not in the delivery line. Andrew has a direct line to Herwin."},
+  hub:{title:"All four engineers, every module",body:"The pod is not delegated one engineer per system. All four engineers work across SAFX Reports and the Line Haul Model together, so knowledge is shared and no module depends on a single person."},
+  de1:{title:"Data Engineer 1",body:"Owns the ETL and the data pipelines feeding SAFX Reports and the Line Haul Model. Keeps the data layer clean and modern."},
+  de2:{title:"Data Engineer 2",body:"Through the joint RRTS &times; Prowesstics effort, simplified a 6,000-line monolithic stored procedure into individual, maintainable ETL scripts. A sound, modern ETL structure in place of the old single block."},
+  pe1:{title:"Power BI Engineer 1",body:"Modelling lead. SSAS actively retiring. MS Power BI and Microsoft Fabric both live now. Driving Fabric optimisation and the reporting model."},
+  pe2:{title:"Power BI Engineer 2",body:"Drove the MS Power BI modernisation. Rendering on the executive reporting cut from 2 minutes to under 10 seconds."},
+  kpi:{title:"KPI Executive Board",body:"The morning page the executive team opens, with 150 metrics live for ops. Load time taken from 90 seconds to under 10 through modernisation, not just tuning."},
+  safx:{title:"SAFX Reports",body:"Reporting modernised on MS Power BI through the joint RRTS &times; Prowesstics effort. Where it used to be cluttered and slow, it is now structured and fast. MS Power BI and Microsoft Fabric are both live now."},
+  linehaul:{title:"Line Haul Model",body:"The structural business logic engine, re-aligned to how RRTS actually operates and consistent with the operations playbook."},
+  cadence:{title:"Communication channels",body:"Azure DevOps for delivery and boards, Teams for live conversation, Outlook for formal. All channels used, none ignored. Andrew can reach anyone on the pod."},
+  "ops-vocab":{title:"RRTS operations vocab",body:"Terms from your operations now used in standups, reviews, and tickets without translation. No lookup time between business and engineering."},
+  sops:{title:"Internal SOPs",body:"Walked through with your team, not skimmed. The pod knows the why, not just the what."},
+  domain:{title:"Operational domain knowledge",body:"Why each rule exists and why each KPI matters. The pod reasons about trade-offs in your terms, not just code terms."}
+};
+function openModal(key){var d=POD_MODAL[key];if(d){modal(d.title,d.body);}}
+function closeModal(e){
+  if(e && e.target && e.target.id !== 'modal-overlay' && e.type==='click' && !e.target.classList.contains('modal-close')) return;
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// ============================================================
+// PLAY / PAUSE
+// ============================================================
+function togglePlay(){
+  playing = !playing;
+  document.getElementById('play-icon').innerHTML = playing ? '<svg class="ico"><use href="#i-pause"/></svg>' : '<svg class="ico"><use href="#i-play"/></svg>';
+  document.getElementById('play-label').textContent = playing ? 'Pause' : 'Play';
+  if(playing){
+    playTimer = setInterval(function(){
+      if(current < SCENES.length-1){ next(); } else { togglePlay(); }
+    }, 30000);
+  } else {
+    clearInterval(playTimer);
+  }
+}
+
+// ============================================================
+// KEYBOARD
+// ============================================================
+document.addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight') next();
+  else if(e.key==='ArrowLeft') prev();
+  else if(e.key==='Escape'){ closeModal(); 
+    if(document.getElementById('cap-panel').classList.contains('open')) toggleCapture(); }
+});
+
+// ============================================================
+// INIT
+// ============================================================
+buildTabs();
+buildJourneyTabs();
+renderJourney(3);
+selCat('improvement');
+(function(){var pd=document.querySelector('.pod-diagram');if(pd){var b=pd.querySelectorAll('.pod-band');for(var i=b.length-1;i>=1;i--){var d=document.createElement('div');d.className='pod-conn';pd.insertBefore(d,b[i]);}}})();
+
+render();
+</script>
+</body>
+</html>
